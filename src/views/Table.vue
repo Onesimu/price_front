@@ -85,87 +85,11 @@
     </div>
 
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-4">
-        <article class="tile is-child box">
-          <h4 class="title">Table is-bordered</h4>
-          <table class="table is-bordered">
-            <thead>
-              <tr>
-                <th>One</th>
-                <th>Two</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Three</td>
-                <td>Four</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-      </div>
-      <div class="tile is-parent is-4">
-        <article class="tile is-child box">
-          <h4 class="title">Table is-striped</h4>
-          <table class="table is-striped">
-            <thead>
-              <tr>
-                <th>One</th>
-                <th>Two</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Three</td>
-                <td>Four</td>
-              </tr>
-              <tr>
-                <td>Five</td>
-                <td>Six</td>
-              </tr>
-              <tr>
-                <td>Seven</td>
-                <td>Eight</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-      </div>
-      <div class="tile is-parent is-4">
-        <article class="tile is-child box">
-          <h4 class="title">Table is-narrow</h4>
-          <table class="table is-narrow">
-            <thead>
-              <tr>
-                <th>One</th>
-                <th>Two</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Three</td>
-                <td>Four</td>
-              </tr>
-              <tr>
-                <td>Five</td>
-                <td>Six</td>
-              </tr>
-              <tr>
-                <td>Seven</td>
-                <td>Eight</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-      </div>
-    </div>
-
-    <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
           <h4 class="title">Table Responsive</h4>
           <div class="table-responsive">
-            <table class="table is-bordered is-striped is-narrow">
+            <table class="table is-striped is-narrow">
               <thead>
                 <tr>
                   <th></th>

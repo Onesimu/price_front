@@ -4,9 +4,7 @@
       <div class="content has-text-centered">
         <p class="social">
           <a href="https://github.com/vue-bulma/vue-bulma-tutorial">
-            <span class="icon">
-              <i class="fa fa-github"></i>
-            </span>
+            联系我们
           </a>
         </p>
       </div>

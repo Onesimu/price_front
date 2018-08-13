@@ -22,8 +22,9 @@
     "npm": ">=3"
   },
   "scripts": {
-    "build": "rimraf site && cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress",
     "build:open": "http-server -p 8000 site/",
+		"build": "cross-env NODE_ENV=production node build/build.js",
+    "clean": "rm -rf dist",
     "deploy": "gh-pages -d site",
     "dev": "cross-env NODE_ENV=development node build/dev-server.js"
   },
@@ -96,6 +97,7 @@
     "rimraf": "2.5.4",
     "sass-loader": "^6.0.2",
     "serve-favicon": "^2.4.1",
+    "shelljs": "^0.8.2",
     "style-loader": "^0.13.1",
     "transliteration": "^1.5.3",
     "url-loader": "0.5.7",

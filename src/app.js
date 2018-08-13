@@ -9,6 +9,9 @@ import store from './store'
 import { TOGGLE_PAGE, TOGGLE_SIDEBAR } from 'vuex-store/mutation-types'
 import locales from 'i18n/locales'
 import Promise from 'es6-promise'
+// 引入 网络请求模块
+import http from './utils/http.js';
+Vue.prototype.$http = http;
 
 Promise.polyfill()
 Vue.use(NProgress)

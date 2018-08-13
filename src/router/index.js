@@ -54,7 +54,7 @@ export default new Router({
     {
       name: 'Demo-zh-CN',
       path: '/demo',
-      component: loadView('Table')
+      component: loadView('Login')
     },
     {
       name: 'Manual-zh-CN',

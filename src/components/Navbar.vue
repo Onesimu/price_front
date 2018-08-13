@@ -10,12 +10,12 @@
           <a class="nav-item hero-brand is-hidden-mobile" href="/#/home">
             <img class="tour-logo" src="~assets/logo.png">
             <div class="tour-title">
-              <span class="vue">Vue</span><span class="bulma">Bulma</span>
+              <span class="vue">运费</span><span class="bulma">系统</span>
             </div>
           </a>
         </div>
         <div class="nav-right is-flex" v-if="device.isMobile">
-          <router-link class="nav-item" to="/demo">
+          <router-link class="nav-item" to="/login">
             <span class="icon is-small">
               <i class="fa fa-television"></i>
             </span>
@@ -41,16 +41,19 @@
           </span>
         </div>
         <div class="nav-right is-flex" v-else>
-          <router-link class="nav-item hvr-underline-from-center" to="/demo">
+          <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
           </router-link>
           <router-link class="nav-item hvr-underline-from-center" to="/manual">
             {{$t('header.nav[1]')}}
           </router-link>
+					<router-link class="nav-item hvr-underline-from-center" to="/login">
+						{{$t('header.nav[2]')}}
+					</router-link>
           <span class="nav-item tour-drop-down" 
             @mouseenter="showLangs = true" 
             @mouseleave="showLangs = false">
-            {{$t('header.nav[2]')}}
+            {{$t('header.nav[3]')}}
             <span class="icon">
               <i class="fa fa-caret-down"></i>
             </span>

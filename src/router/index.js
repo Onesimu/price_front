@@ -52,14 +52,14 @@ export default new Router({
       component: loadView('Table')
     },
     {
-      name: 'Demo-zh-CN',
-      path: '/demo',
+      name: 'Login-zh-CN',
+      path: '/login',
       component: loadView('Login')
     },
     {
       name: 'Manual-zh-CN',
       path: '/manual',
-      component: loadView('Manual'),
+      component: loadView('Table'),
 
       children: generateRoutes(manual)
     },

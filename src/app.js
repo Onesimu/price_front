@@ -8,6 +8,11 @@ import router from './router'
 import store from './store'
 import { TOGGLE_PAGE, TOGGLE_SIDEBAR } from 'vuex-store/mutation-types'
 import locales from 'i18n/locales'
+
+import VueBlu from 'vue-blu'
+import 'vue-blu/dist/css/vue-blu.min.css'
+Vue.use(VueBlu)
+
 import Promise from 'es6-promise'
 // 引入 网络请求模块
 import http from './utils/http.js';

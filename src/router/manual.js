@@ -13,7 +13,7 @@ export default [
         icon: 'fa-laptop'
       },
       {
-        name: 'Icon',
+        name: 'Country',
         icon: 'fa-leaf'
       }
     ]

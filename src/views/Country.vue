@@ -3,23 +3,23 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <h4 class="title">港口信息</h4>
+          <h4 class="title">国家和地区信息</h4>
           <table class="table">
             <thead>
               <tr>
-                <th>港口中文名</th>
-                <th>港口英文名</th>
-                <th>港口代码</th>
-                <th>国家</th>
+                <th>中文名</th>
+                <th>英文名</th>
+                <th>代码</th>
+                <th>区域</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr v-for="it in ports">
+              <tr v-for="it in countries">
                 <td>{{it.nameCn}}</td>
                 <td>{{it.nameEn}}</td>
                 <td>{{it.code}}</td>
-								<td>{{it.countryId}}</td>
+								<td>{{it.regionId}}</td>
 
               </tr>
 
@@ -37,12 +37,12 @@ export default {
 
   data () {
     return {
-			ports:[]
+			countries:[]
     }
   },
   async mounted () {
-		var data = await this.$spring.Port.findAll().then(
-			json => this.ports = json.map(it => it.data())
+		var data = await this.$spring.Country.findAll().then(
+			json => this.countries = json.map(it => it.data())
 		)
   },
   methods: {

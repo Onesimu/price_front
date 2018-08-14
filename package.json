@@ -36,6 +36,7 @@
     "hover.css": "^2.0.2",
     "qs": "^6.5.2",
     "smooth-scroll": "cferdinandi/smooth-scroll",
+    "spring-data-rest-js": "^0.2.21",
     "vue": "^2.2.1",
     "vue-bulma-brace": "^0.1.0",
     "vue-bulma-breadcrumb": "^1.0.1",

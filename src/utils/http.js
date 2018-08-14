@@ -3,7 +3,7 @@ import axios from 'axios'
 // 引入  post  跨越
 import qs from 'qs'
 // 测试地址
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/rest';
 // 线上地址
 // axios.defaults.baseURL = '';
 // request拦截器

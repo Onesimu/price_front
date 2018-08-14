@@ -220,6 +220,49 @@
   </div>
 </template>
 
+<script>
+export default {
+
+  data () {
+    return {
+      data: {
+        body: {
+          username: null,
+          password: null
+        },
+        rememberMe: false
+      },
+      error: null
+    }
+  },
+  async mounted () {
+//     if (this.$auth.redirect()) {
+//       console.log('Redirect from: ' + this.$auth.redirect().from.name)
+//     }
+    // Can set query parameter here for auth redirect or just do it silently in login redirect.
+		
+		// var data = await this.$http.get('seaexpressprices');
+		// var data = await this.$spring.get('/ports').send().then(json => console.log(this.$spring.Port.jsonToEntityList(json)));
+		// var data = await this.$spring.get('/ports').follow('next').then(json => console.log(this.$spring.Port.jsonToEntityList(json)));
+		var data = await this.$spring.Port.findAll().then(
+			// json => console.log(json[0].get(nameCn))
+			json => console.log(json)
+		)
+		console.log(data);
+  },
+  methods: {
+
+  }
+  // filters: {
+  //   json: function (value) {
+  //     console.log(value)
+  //     return value
+  //   }
+  // }
+
+}
+</script>
+
 <style lang="scss">
 .table-responsive {
   display: block;

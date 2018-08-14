@@ -13,6 +13,19 @@ import Promise from 'es6-promise'
 import http from './utils/http.js';
 Vue.prototype.$http = http;
 
+// const spring = require('spring-data-rest-js');
+import spring from 'spring-data-rest-js'
+spring.requestConfig.baseURL = 'http://localhost:8080//rest//';
+spring.entityConfig.restBaseURL = 'http://localhost:8080//rest//';
+
+spring.Parrier = spring.extend('carriers');
+spring.Country = spring.extend('countries');
+spring.Port = spring.extend('ports');
+spring.Seaexpressprice = spring.extend('seaexpressprices');
+spring.Userinfo = spring.extend('userinfoes');
+
+Vue.prototype.$spring = spring;
+
 Promise.polyfill()
 Vue.use(NProgress)
 Vue.use(VueI18n)

@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     async login () {
-			var data = await this.$http.get('tdCarriers');
+			var data = await this.$http.get('carriers');
 			console.log(data);
 		}
   }

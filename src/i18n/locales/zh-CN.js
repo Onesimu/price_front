@@ -33,6 +33,7 @@ export default {
     collapse: '折叠组件',
 		port:'港口信息',
 		carrier:'承运公司',
-		country:'国家地区'
+		country:'国家地区',
+		seaexpressprice:'航运报价'
   }
 };

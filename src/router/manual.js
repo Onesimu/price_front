@@ -1,7 +1,7 @@
 export default [
-  {
-    name: 'Install'
-  },
+//   {
+//     name: 'Install'
+//   },
   {
     name: 'Basic',
     lableOnly: true,
@@ -25,7 +25,7 @@ export default [
 
     children: [
       {
-        name: 'Collapse',
+        name: 'Seaexpressprice',
         icon: 'fa-window-maximize'
       }
     ]

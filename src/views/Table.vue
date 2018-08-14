@@ -22,8 +22,8 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <td>Misty Abbott</td>
+              <tr v-for="it in seaexpressprices">
+                <td>{{it.nameCn}}</td>
                 <td>Bass Guitar</td>
                 <td class="is-icon">
                   <a href="#">
@@ -36,11 +36,6 @@
                   </a>
                 </td>
               </tr>
-              <tr>
-                <td>John Smith</td>
-                <td>Rhythm Guitar</td>
-                <td class="is-icon">
-                  <a href="#">
 
             </tbody>
           </table>

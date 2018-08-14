@@ -32,8 +32,9 @@ export default {
     interact: '报价维护',
     collapse: '折叠组件',
 		port:'港口信息',
-		carrier:'承运公司',
+		carrier:'航运公司',
 		country:'国家地区',
-		seaexpressprice:'航运报价'
+		seaexpressprice:'航运报价',
+		userinfo:'用户信息'
   }
 };

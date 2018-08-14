@@ -1,0 +1,80 @@
+<template>
+  <div>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <h4 class="title">港口信息</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>港口中文名</th>
+                <th>港口英文名</th>
+                <th>港口代码</th>
+                <th>国家</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr v-for="it in seaexpressprices">
+                <td>{{it.nameCn}}</td>
+                <td>{{it.nameEn}}</td>
+                <td>{{it.code}}</td>
+								<td>{{it.countryId}}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+
+  data () {
+    return {
+			seaexpressprices:[]
+    }
+  },
+  async mounted () {
+//     if (this.$auth.redirect()) {
+//       console.log('Redirect from: ' + this.$auth.redirect().from.name)
+//     }
+    // Can set query parameter here for auth redirect or just do it silently in login redirect.
+		
+		// var data = await this.$http.get('seaexpressprices');
+		// var data = await this.$spring.get('/ports').send().then(json => console.log(this.$spring.Port.jsonToEntityList(json)));
+		// var data = await this.$spring.get('/ports').follow('next').then(json => console.log(this.$spring.Port.jsonToEntityList(json)));
+		var data = await this.$spring.Port.findAll().then(
+			// json => console.log(json[0].get(nameCn))
+			json => this.seaexpressprices = json.map(it => it.data())
+		)
+// 		var data = await this.$spring.Seaexpressprice.findAll()
+// 		this.seaexpressprices = data
+		console.log('data'+data);
+  },
+  methods: {
+
+  }
+  // filters: {
+  //   json: function (value) {
+  //     console.log(value)
+  //     return value
+  //   }
+  // }
+
+}
+</script>
+
+<style lang="scss">
+.table-responsive {
+  display: block;
+  width: 100%;
+  min-height: .01%;
+  overflow-x: auto;
+}
+</style>

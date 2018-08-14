@@ -13,8 +13,8 @@ function generateRouteByLang (items, lang, routes = []) {
     if (item.name && !item.lableOnly) {
       routes.push({
         name: item.name + '-' + lang,
-        path: item.path ? (lang + item.path) : (lang + '/' + item.name.toLowerCase()),
-        component: loadDoc(item.name, lang),
+        path: lang + '/' + item.name.toLowerCase(),
+        component: loadView(item.name),
         meta: {
           label: locales[lang][item.name.toLowerCase()],
           icon: item.icon
@@ -59,7 +59,7 @@ export default new Router({
     {
       name: 'Manual-zh-CN',
       path: '/manual',
-      component: loadView('Table'),
+      component: loadView('Manual'),
 
       children: generateRoutes(manual)
     },

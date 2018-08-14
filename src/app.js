@@ -18,7 +18,7 @@ import spring from 'spring-data-rest-js'
 spring.requestConfig.baseURL = 'http://localhost:8080//rest//';
 spring.entityConfig.restBaseURL = 'http://localhost:8080//rest//';
 
-spring.Parrier = spring.extend('carriers');
+spring.Carrier = spring.extend('carriers');
 spring.Country = spring.extend('countries');
 spring.Port = spring.extend('ports');
 spring.Seaexpressprice = spring.extend('seaexpressprices');

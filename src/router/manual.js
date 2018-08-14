@@ -9,7 +9,7 @@ export default [
 
     children: [
       {
-        name: 'Button',
+        name: 'Port',
         icon: 'fa-laptop'
       },
       {

@@ -25,11 +25,13 @@ export default {
     }
   },
   manual: {
-    install: '安装使用',
-    basic: '基础组件',
+    install: '欢迎使用',
+    basic: '基础信息',
     button: '按钮',
     icon: '图标',
-    interact: '交互组件',
-    collapse: '折叠组件'
+    interact: '报价维护',
+    collapse: '折叠组件',
+		port:'港口信息',
+		carrier:'承运公司'
   }
 };

@@ -33,17 +33,53 @@
 								<tag type="primary">{{ row.code }}</tag>
 							</template>
 						</column>
-						<column label="区域" field="regionId" sorter="custom"></column>
+						<column label="区域" field="region" sorter="custom"></column>
 					</data-table>
-					<modal title="查看" :width="520" :is-show="isShow" transition="fadeDown" @close="isShow=false">
-						<h4>选中了：</h4>
-						<p>
-							<ul>
-								<li v-for="item in selectedItems">
-									{{ item.nameCn }}({{ item.nameEn }} | {{ item.code }})
-								</li>
-							</ul>
-						</p>
+
+					<modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false">
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">国家</label>
+              </div>
+              <div class="control is-grouped">
+                <p class="control is-expanded">
+                  <input class="input" type="text" placeholder="中文名" :value="selectedItems[0] ? selectedItems[0].nameCn : ''">
+                </p>
+                <p class="control is-expanded">
+                  <input class="input" type="email" placeholder="英文名" :value="selectedItems[0] ? selectedItems[0].nameEn : ''">
+                </p>
+              </div>
+            </div>
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">国家代码</label>
+              </div>
+              <div class="control">
+                <p class="control is-expanded">
+                  <input class="input" type="email" placeholder="两位代码" :value="selectedItems[0] ? selectedItems[0].code : ''">
+                </p>
+              </div>
+            </div>
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">区域</label>
+              </div>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select>
+                    <option v-for="it,idx in regionId" :selected="selectedItems[0] ? selectedItems[0].regionId == idx + 1 : false">{{it}} </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">备注</label>
+              </div>
+              <div class="control">
+                <textarea class="textarea" placeholder="添加备注信息"></textarea>
+              </div>
+            </div>
 					</modal>
 				</article>
 			</div>
@@ -51,59 +87,66 @@
 
 	</div>
 </template>
-
 <script>
-	export default {
+  import {regionId} from '../utils/constants'
+  export default {
 
-		data() {
-			return {
-				countries: [],
-				hasSelect: false,
-				isShow: false,
-				selectedItems: [],
-				bordered: true,
-				striped: false,
-				narrow: false,
-			}
-		},
-		async mounted() {
-			var data = await this.$spring.Country.findAll().then(
-				json => this.countries = json.map(it => it.data())
-			)
-		},
-		methods: {
-			onTableChange(params) {
-				console.log(params);
-			},
-			onSelectChange(keys, items) {
-				console.log(keys, items);
-				this.selectedItems = items;
-				if (items.length > 0) {
-					this.hasSelect = true;
-				} else {
-					this.hasSelect = false;
-				}
-			},
-			handleEdit() {
-				this.isShow = true;
-			},
-		},
-		computed: {
-			pagination: {
-				get() {
-					return {
-						total: this.countries.length,
-					};
-				},
-				set(newValue) {}
-			},
-			dataSource2() {
-				return data.slice(0, 9);
-			},
-		},
+    data() {
+      return {
+        countries: [],
+        hasSelect: false,
+        isShow: false,
+        selectedItems: [],
+        bordered: true,
+        striped: false,
+        narrow: false,
+        regionId:regionId
+      }
+    },
+    async mounted() {
+      var data = await this.$spring.Country.findAll().then(
+        // json => this.countries = json.map(it => it.data().region = regionId[it.data().regionId])
+        json => {
+          const map = json.map(it => it.data())
+          map.forEach(it => it.region = regionId[it.regionId - 1])
+          this.countries = map
+        }
+      )
+    },
+    methods: {
+      onTableChange(params) {
+        console.log(params);
+      },
+      onSelectChange(keys, items) {
+        console.log(keys, items);
+        this.selectedItems = items;
+        if (items.length > 0) {
+          this.hasSelect = true;
+        } else {
+          this.hasSelect = false;
+        }
+      },
+      handleEdit() {
+        this.isShow = true;
+      },
+    },
+    computed: {
+      pagination: {
+        get() {
+          return {
+            total: this.countries.length,
+          };
+        },
+        set(newValue) {}
+      },
+      dataSource2() {
+        return data.slice(0, 9);
+      },
+    },
 
-	}
+  }
 </script>
+
 
 <style lang="scss">
 	.table-responsive {

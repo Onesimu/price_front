@@ -36,17 +36,18 @@
 						<column label="区域" field="region" sorter="custom"></column>
 					</data-table>
 
-					<modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false">
+					<modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false"
+                 ok-text="确定" cancel-text="取消" :backdrop-closable="false" :on-ok="save">
             <div class="control is-horizontal">
               <div class="control-label">
                 <label class="label">国家</label>
               </div>
               <div class="control is-grouped">
                 <p class="control is-expanded">
-                  <input class="input" type="text" placeholder="中文名" :value="selectedItems[0] ? selectedItems[0].nameCn : ''">
+                  <input class="input" type="text" placeholder="中文名" v-model="current.nameCn">
                 </p>
                 <p class="control is-expanded">
-                  <input class="input" type="email" placeholder="英文名" :value="selectedItems[0] ? selectedItems[0].nameEn : ''">
+                  <input class="input" type="email" placeholder="英文名" v-model="current.nameEn">
                 </p>
               </div>
             </div>
@@ -56,7 +57,7 @@
               </div>
               <div class="control">
                 <p class="control is-expanded">
-                  <input class="input" type="email" placeholder="两位代码" :value="selectedItems[0] ? selectedItems[0].code : ''">
+                  <input class="input" type="email" placeholder="两位代码" v-model="current.code">
                 </p>
               </div>
             </div>
@@ -66,8 +67,8 @@
               </div>
               <div class="control">
                 <div class="select is-fullwidth">
-                  <select>
-                    <option v-for="it,idx in regionId" :selected="selectedItems[0] ? selectedItems[0].regionId == idx + 1 : false">{{it}} </option>
+                  <select v-model="current.regionId">
+                    <option v-for="it,idx in regionId" :key="idx" :value="idx">{{it}} </option>
                   </select>
                 </div>
               </div>
@@ -94,19 +95,22 @@
     data() {
       return {
         countries: [],
+        data:[],
         hasSelect: false,
         isShow: false,
         selectedItems: [],
         bordered: true,
         striped: false,
         narrow: false,
-        regionId:regionId
+        regionId:regionId,
+        current:{}
       }
     },
     async mounted() {
       var data = await this.$spring.Country.findAll().then(
         // json => this.countries = json.map(it => it.data().region = regionId[it.data().regionId])
         json => {
+          this.data = json
           const map = json.map(it => it.data())
           map.forEach(it => it.region = regionId[it.regionId - 1])
           this.countries = map
@@ -121,6 +125,8 @@
         console.log(keys, items);
         this.selectedItems = items;
         if (items.length > 0) {
+          // this.current = this.data.find(it => it.countryId = items[0].countryId)
+          this.current = items[0]
           this.hasSelect = true;
         } else {
           this.hasSelect = false;
@@ -129,6 +135,20 @@
       handleEdit() {
         this.isShow = true;
       },
+      save(){
+        // const current = this.selectedItems[0]
+        const find = this.data.find(it => it.countryId = this.current.countryId)
+        console.log(this.current)
+        console.log(find)
+
+        // find.save().then( () =>
+        //   this.mounted()
+        // ).catch(err =>
+        //   this.$modal.alert({
+        //     content: '操作失败！请联系管理员'
+        //   })
+        // )
+      }
     },
     computed: {
       pagination: {
@@ -139,6 +159,7 @@
         },
         set(newValue) {}
       },
+      // current(){ return this.selectedItems.leagth > 0 ? this.selectedItems[0] : new this.$spring.Country()},
       dataSource2() {
         return data.slice(0, 9);
       },

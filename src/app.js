@@ -28,6 +28,8 @@ spring.Country = spring.extend('countries');
 spring.Port = spring.extend('ports');
 spring.Seaexpressprice = spring.extend('seaexpressprices');
 spring.Userinfo = spring.extend('userinfoes');
+spring.CarrierView = spring.extend('carrierviews');
+spring.PortView = spring.extend('portviews')
 
 Vue.prototype.$spring = spring;
 

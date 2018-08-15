@@ -19,7 +19,7 @@
                 <td>{{it.nameCn}}</td>
                 <td>{{it.nameEn}}</td>
                 <td>{{it.code}}</td>
-								<td>{{it.countryId}}</td>
+				<td>{{it.countryNameCn}}</td>
 
               </tr>
 
@@ -41,7 +41,7 @@ export default {
     }
   },
   async mounted () {
-		var data = await this.$spring.Carrier.findAll().then(
+		var data = await this.$spring.CarrierView.findAll().then(
 			json => this.carriers = json.map(it => it.data())
 		)
   },

@@ -27,10 +27,10 @@ module.exports = {
     proxyTable: {
         '/rest': {
             target: 'http://localhost:8090/',
-            changeOrigin: true,
-						    pathRewrite: {
-						    	'^/rest': '/'
-						    }
+            changeOrigin: true
+						    // pathRewrite: {
+						    // 	'^/rest': '/rest'
+						    // }
 
         }
     },

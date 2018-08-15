@@ -4,6 +4,7 @@
 			<div class="tile is-parent">
 				<article class="tile is-child box">
 					<h4 class="title">国家和地区信息</h4>
+
 					<data-table :data="countries" striped checkable show-index :pagination="pagination" rowKey="countryId" :on-select-change="onSelectChange"
 					    :change="onTableChange">
 						<table-toolbar has-refresh has-columns-control>
@@ -26,6 +27,7 @@
 								</div>
 							</template>
 						</table-toolbar>
+
 						<column label="中文名" field="nameCn"></column>
 						<column label="英文名" field="nameEn" sorter="custom"></column>
 						<column label="国家代码" field="code">
@@ -33,7 +35,11 @@
 								<tag type="primary">{{ row.code }}</tag>
 							</template>
 						</column>
-						<column label="区域" field="region" sorter="custom"></column>
+						<column label="区域" field="regionId" sorter="custom">
+              <template slot-scope="row">
+                <span>{{ regionId[row.regionId] }}</span>
+              </template>
+            </column>
 					</data-table>
 
 					<modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false"
@@ -112,7 +118,7 @@
         json => {
           this.data = json
           const map = json.map(it => it.data())
-          map.forEach(it => it.region = regionId[it.regionId - 1])
+          // map.forEach(it => it.region = regionId[it.regionId])
           this.countries = map
         }
       )
@@ -137,16 +143,22 @@
       },
       save(){
         // const current = this.selectedItems[0]
-        const find = this.data.find(it => it.countryId = this.current.countryId)
-        console.log(this.current)
-        console.log(find)
+        const find = this.data.find(it => it.id == this.current.countryId)
+        // console.log(this.current)
+        // console.log(find)
 
-        // find.save().then( () =>
-        //   this.mounted()
-        // ).catch(err =>
+        const entity = new this.$spring.Country(find.data())
+        // console.log(entity)
+        entity.save()
+        //   .then( json =>
+        //   // this.mounted()
+        //   console.log(json)
+        // ).catch(err => {
+        //   console.log(err)
         //   this.$modal.alert({
         //     content: '操作失败！请联系管理员'
         //   })
+        //   }
         // )
       }
     },

@@ -6,7 +6,7 @@
 					<h4 class="title">国家和地区信息</h4>
 
 					<data-table :data="countries" striped checkable show-index :pagination="pagination" rowKey="countryId" :on-select-change="onSelectChange"
-					    :change="onTableChange">
+					    :change="onTableChange" >
 						<table-toolbar has-refresh has-columns-control>
 							<template slot="left">
 								<div class="level-item">
@@ -37,11 +37,14 @@
 							<template slot="right">
 								<div class="level-item">
 									<p class="control has-addons">
-										<input class="input" type="text" placeholder="查找条件">
-										<button class="button">搜索</button>
+										<input class="input" placeholder="查找条件" v-model="word">
+										<button class="button" @click="find">搜索</button>
 									</p>
 								</div>
-							</template>
+                <div class="level-item">
+                <button class="button is-info" @click="search">高级搜索</button>
+                </div>
+              </template>
 						</table-toolbar>
 
 						<column label="中文名" field="nameCn"></column>
@@ -104,6 +107,7 @@
               </div>
             </div>
 					</modal>
+
 				</article>
 			</div>
 		</div>
@@ -121,12 +125,10 @@
         hasSelect: false,
         isShow: false,
         selectedItems: [],
-        bordered: true,
-        striped: false,
-        narrow: false,
         regionId:regionId,
         current:{},
-        pagination:{total:0}
+        pagination:{total:0},
+        word:''
       }
     },
     async mounted() {
@@ -137,13 +139,10 @@
       async getData() {
         const size = this.pagination.total || 0
         var data = await this.$spring.Country.findAll({size:size}).then(
-          // json => this.countries = json.map(it => it.data().region = regionId[it.data().regionId])
           json => {
             this.data = json
-            // console.log(json)
             this.pagination.total = json.page.totalElements
             const map = json.map(it => it.data())
-            // map.forEach(it => it.region = regionId[it.regionId])
             this.countries = map
           }
         )
@@ -152,7 +151,6 @@
         console.log(params);
       },
       onSelectChange(keys, items) {
-        // console.log(keys, items);
         this.selectedItems = items;
         if (items.length > 0) {
           // this.current = this.data.find(it => it.countryId = items[0].countryId)
@@ -163,7 +161,6 @@
         }
       },
       handleEdit() {
-        // console.log(this.selectedItems)
         if(this.selectedItems.length > 1){
           this.$modal.alert({
             content: '请只选择一项进行修改'
@@ -189,13 +186,7 @@
         })
       },
       save(){
-        // const current = this.selectedItems[0]
-        // const find = this.data.find(it => it.id == this.current.countryId)
-        // console.log(this.current)
-        // console.log(find)
-
         const entity = new this.$spring.Country(this.current)
-        // console.log(entity)
         // find.patchData(this.current)
         // find.save()
         entity.save()
@@ -213,18 +204,22 @@
         this.$modal.alert({
           content: '操作失败！请联系管理员'
         })
-      }
+      },
+      find(){
+        const word = this.word;
+        const filter = this.data.map(it => it.data()).filter(
+          it => it.nameCn.includes(word) || it.nameEn.includes(word) || it.code.includes(this.word))
+        if(filter.length == 0 ){
+          this.$modal.alert({
+            content: '未查到结果,请更换搜索词,或使用高级搜索'
+          })
+          return
+        }
+        this.countries = filter
+      },
+      search(){}
     },
     computed: {
-      // pagination: {
-      //   get() {
-      //     return {
-      //       total: this.data.page.totalElements,
-      //     };
-      //   },
-      //   set(newValue) {}
-      // },
-      // current(){ return this.selectedItems.leagth > 0 ? this.selectedItems[0] : new this.$spring.Country()},
       dataSource2() {
         return data.slice(0, 9);
       },

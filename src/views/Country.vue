@@ -42,7 +42,7 @@
 									</p>
 								</div>
                 <div class="level-item">
-                <button class="button is-info" @click="search">高级搜索</button>
+                  <button class="button is-info" @click="search">高级搜索</button>
                 </div>
               </template>
 						</table-toolbar>

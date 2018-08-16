@@ -109,21 +109,29 @@
         striped: false,
         narrow: false,
         regionId:regionId,
-        current:{}
+        current:{},
+        pagination:{total:0}
       }
     },
     async mounted() {
-      var data = await this.$spring.Country.findAll().then(
-        // json => this.countries = json.map(it => it.data().region = regionId[it.data().regionId])
-        json => {
-          this.data = json
-          const map = json.map(it => it.data())
-          // map.forEach(it => it.region = regionId[it.regionId])
-          this.countries = map
-        }
-      )
+      // await extracted.call(this);
+      this.getData()
     },
     methods: {
+      async getData() {
+        const size = this.pagination.total || 0
+        var data = await this.$spring.Country.findAll({size:size}).then(
+          // json => this.countries = json.map(it => it.data().region = regionId[it.data().regionId])
+          json => {
+            this.data = json
+            // console.log(json)
+            this.pagination.total = json.page.totalElements
+            const map = json.map(it => it.data())
+            // map.forEach(it => it.region = regionId[it.regionId])
+            this.countries = map
+          }
+        )
+      },
       onTableChange(params) {
         console.log(params);
       },
@@ -149,28 +157,32 @@
 
         const entity = new this.$spring.Country(find.data())
         // console.log(entity)
+        // find.patchData(this.current)
+        // find.save()
         entity.save()
-        //   .then( json =>
-        //   // this.mounted()
-        //   console.log(json)
-        // ).catch(err => {
-        //   console.log(err)
-        //   this.$modal.alert({
-        //     content: '操作失败！请联系管理员'
-        //   })
-        //   }
-        // )
+          .then( json => {
+            this.getData()
+          // console.log(json)
+            this.$notify.info({content: '修改成功'})
+          }
+        ).catch(err => {
+          console.log(err)
+          this.$modal.alert({
+            content: '操作失败！请联系管理员'
+          })
+          }
+        )
       }
     },
     computed: {
-      pagination: {
-        get() {
-          return {
-            total: this.countries.length,
-          };
-        },
-        set(newValue) {}
-      },
+      // pagination: {
+      //   get() {
+      //     return {
+      //       total: this.data.page.totalElements,
+      //     };
+      //   },
+      //   set(newValue) {}
+      // },
       // current(){ return this.selectedItems.leagth > 0 ? this.selectedItems[0] : new this.$spring.Country()},
       dataSource2() {
         return data.slice(0, 9);

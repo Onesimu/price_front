@@ -14,9 +14,17 @@
 										<span class="icon is-small">
 											<i class="fa fa-edit"></i>
 										</span>
-										<span>查看</span>
+										<span>修改</span>
 									</a>
 								</div>
+                <div class="level-item">
+                  <a class="button is-primary" @click="handleCreate">
+										<span class="icon is-small">
+											<i class="fa fa-new"></i>
+										</span>
+                    <span>新增</span>
+                  </a>
+                </div>
 							</template>
 							<template slot="right">
 								<div class="level-item">
@@ -147,15 +155,26 @@
         }
       },
       handleEdit() {
+        console.log(this.selectedItems)
+        if(this.selectedItems.length > 1){
+          this.$modal.alert({
+            content: '请只选择一项进行修改'
+          })
+          return
+        }
+        this.isShow = true;
+      },
+      handleCreate(){
+        this.current = {}
         this.isShow = true;
       },
       save(){
         // const current = this.selectedItems[0]
-        const find = this.data.find(it => it.id == this.current.countryId)
+        // const find = this.data.find(it => it.id == this.current.countryId)
         // console.log(this.current)
         // console.log(find)
 
-        const entity = new this.$spring.Country(find.data())
+        const entity = new this.$spring.Country(this.current)
         // console.log(entity)
         // find.patchData(this.current)
         // find.save()
@@ -163,7 +182,7 @@
           .then( json => {
             this.getData()
           // console.log(json)
-            this.$notify.info({content: '修改成功'})
+            this.$notify.info({content: '操作成功'})
           }
         ).catch(err => {
           console.log(err)

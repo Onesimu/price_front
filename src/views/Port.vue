@@ -54,9 +54,9 @@
                 <tag type="info">{{ row.code }}</tag>
               </template>
             </column>
-            <column label="区域" field="countryNameCn" sorter="custom">
+            <column label="区域" field="countryId" sorter="custom">
               <template slot-scope="row">
-                <span>{{ row.countryNameCn }}</span>
+                <span>{{ countryName(row) }}</span>
               </template>
             </column>
           </data-table>
@@ -65,7 +65,7 @@
                  ok-text="确定" cancel-text="取消" :backdrop-closable="false" :on-ok="save">
             <div class="control is-horizontal">
               <div class="control-label">
-                <label class="label">国家</label>
+                <label class="label">港口</label>
               </div>
               <div class="control is-grouped">
                 <p class="control is-expanded">
@@ -95,15 +95,16 @@
 <!--                  <select v-model="current.countryNameCn">
                     <option v-for="it,idx in regionId" :key="idx" :value="idx">{{it}} </option>
                   </select>-->
-<!--                  <b-autocomplete
-                    v-model="current.countryId"
+                  <!--v-model="selected.countryNameCn"-->
+                  <b-autocomplete
+                    :value="countryName(current)"
+                    @input="value => input = value"
                     placeholder="区域"
-                    :keep-first="keepFirst"
-                    :open-on-focus="openOnFocus"
                     :data="filteredDataObj"
-                    field="user.first_name"
-                    @select="option => selected = option">
-                  </b-autocomplete>-->
+                    field="nameCn"
+                    :open-on-focus="true"
+                    @select="option => current.countryId = option.countryId">
+                  </b-autocomplete>
                 </div>
               </div>
             </div>
@@ -112,7 +113,7 @@
                 <label class="label">备注</label>
               </div>
               <div class="control">
-                <textarea class="textarea" placeholder="添加备注信息"></textarea>
+                <textarea class="textarea" placeholder="添加备注信息" :value="selected.countryId">{{selected.id}}</textarea>
               </div>
             </div>
           </modal>
@@ -128,13 +129,37 @@
   import crud from "./crud"
   export default {
 
+    data() {
+      return {
+        country:[],
+        selected: {},
+        input:''
+      }
+    },
     mixins: [crud],
     created(){
       this.entityClass = this.$spring.Port
-      this.db.ports = this.data
+      // this.db.ports = this.data
+      this.country = this.$db.country.map(it => it.data())
+    },
+    methods:{
+      countryName(item = this.current){
+        // console.log(this.country,this.current)
+        const find = this.country.find(it => it.countryId == item.countryId)
+        return find ? find.nameCn : ''
+      }
+    },
+    computed: {
+      filteredDataObj() {
+        return this.country.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input)
+            // .toLowerCase()
+            // .indexOf(this.current.toLowerCase()) >= 0
+        })
+      }
     }
-
-
 
   }
 </script>

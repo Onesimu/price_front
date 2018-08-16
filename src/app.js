@@ -42,7 +42,7 @@ Vue.prototype.$spring = spring;
 
 Vue.prototype.$db = {};
 
-spring.Country.findAll().then(json => Vue.prototype.$db.country = json)
+spring.Country.findAll().then(json => spring.Country.findAll({size:json.page.totalElements})).then(json => Vue.prototype.$db.country = json)
 
 Vue.use(NProgress)
 Vue.component('demo-section', DemoSection)

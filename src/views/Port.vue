@@ -131,7 +131,7 @@
 
     data() {
       return {
-        country:[],
+        // country:[],
         selected: {},
         input:''
       }
@@ -140,7 +140,7 @@
     created(){
       this.entityClass = this.$spring.Port
       // this.db.ports = this.data
-      this.country = this.$db.country.map(it => it.data())
+      // this.country = this.$db.country.map(it => it.data())
     },
     methods:{
       countryName(item = this.current){
@@ -158,6 +158,9 @@
             // .toLowerCase()
             // .indexOf(this.current.toLowerCase()) >= 0
         })
+      },
+      country(){
+        return this.$db.country.map(it => it.data())
       }
     }
 

@@ -18,11 +18,19 @@
 									</a>
 								</div>
                 <div class="level-item">
-                  <a class="button is-primary" @click="handleCreate">
+                  <a class="button is-info" @click="handleCreate">
 										<span class="icon is-small">
-											<i class="fa fa-new"></i>
+											<i class="fa fa-plus"></i>
 										</span>
                     <span>新增</span>
+                  </a>
+                </div>
+                <div class="level-item">
+                  <a class="button is-danger" @click="handleDelete">
+										<span class="icon is-small">
+											<i class="fa fa-remove"></i>
+										</span>
+                    <span>删除</span>
                   </a>
                 </div>
 							</template>
@@ -40,7 +48,7 @@
 						<column label="英文名" field="nameEn" sorter="custom"></column>
 						<column label="国家代码" field="code">
 							<template slot-scope="row">
-								<tag type="primary">{{ row.code }}</tag>
+								<tag type="info">{{ row.code }}</tag>
 							</template>
 						</column>
 						<column label="区域" field="regionId" sorter="custom">
@@ -144,7 +152,7 @@
         console.log(params);
       },
       onSelectChange(keys, items) {
-        console.log(keys, items);
+        // console.log(keys, items);
         this.selectedItems = items;
         if (items.length > 0) {
           // this.current = this.data.find(it => it.countryId = items[0].countryId)
@@ -155,7 +163,7 @@
         }
       },
       handleEdit() {
-        console.log(this.selectedItems)
+        // console.log(this.selectedItems)
         if(this.selectedItems.length > 1){
           this.$modal.alert({
             content: '请只选择一项进行修改'
@@ -168,6 +176,18 @@
         this.current = {}
         this.isShow = true;
       },
+      handleDelete(){
+        if(this.selectedItems.length > 1){
+          this.$modal.alert({
+            content: '请只选择一项进行操作'
+          })
+          return
+        }
+        this.$modal.confirm({
+          content: `请确认删除: ${this.current.nameCn}`,
+          onOk: this.delete
+        })
+      },
       save(){
         // const current = this.selectedItems[0]
         // const find = this.data.find(it => it.id == this.current.countryId)
@@ -179,18 +199,20 @@
         // find.patchData(this.current)
         // find.save()
         entity.save()
-          .then( json => {
-            this.getData()
-          // console.log(json)
-            this.$notify.info({content: '操作成功'})
-          }
-        ).catch(err => {
-          console.log(err)
-          this.$modal.alert({
-            content: '操作失败！请联系管理员'
-          })
-          }
-        )
+          .then(this.success).catch(this.fail)
+      },
+      delete(){
+        this.$spring.Country.remove(this.current.countryId).then(this.success).catch(this.fail)
+      },
+      success(json){
+        this.getData()
+        this.$notify.info({content: '操作成功'})
+      },
+      fail(err){
+        console.log(err)
+        this.$modal.alert({
+          content: '操作失败！请联系管理员'
+        })
       }
     },
     computed: {

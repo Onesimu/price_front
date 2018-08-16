@@ -1,9 +1,12 @@
+import {db} from "../utils/constants"
+
 export default {
 
   data() {
     return {
       viewData: [],
       data: [],
+      db:db,
       hasSelect: false,
       isShow: false,
       selectedItems: [],
@@ -79,7 +82,7 @@ export default {
         .then(this.success).catch(this.fail)
     },
     delete() {
-      this.entityClass.remove(this.current.countryId).then(this.success).catch(this.fail)
+      this.entityClass.remove(this.current.id).then(this.success).catch(this.fail)
     },
     success(json) {
       this.getData()

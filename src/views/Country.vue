@@ -5,7 +5,7 @@
 				<article class="tile is-child box">
 					<h4 class="title">国家和地区信息</h4>
 
-					<data-table :data="countries" striped checkable show-index :pagination="pagination" rowKey="countryId" :on-select-change="onSelectChange"
+					<data-table :data="viewData" striped checkable show-index :pagination="pagination" rowKey="countryId" :on-select-change="onSelectChange"
 					    :change="onTableChange" >
 						<table-toolbar has-refresh has-columns-control>
 							<template slot="left">
@@ -116,115 +116,19 @@
 </template>
 <script>
   import {regionId} from '../utils/constants'
+  import crud from "./crud"
   export default {
 
     data() {
       return {
-        countries: [],
-        data:[],
-        hasSelect: false,
-        isShow: false,
-        selectedItems: [],
         regionId:regionId,
-        current:{},
-        pagination:{total:0},
-        word:''
       }
     },
-    async mounted() {
-      // await extracted.call(this);
-      this.getData()
-    },
-    methods: {
-      async getData() {
-        const size = this.pagination.total || 0
-        var data = await this.$spring.Country.findAll({size:size}).then(
-          json => {
-            this.data = json
-            this.pagination.total = json.page.totalElements
-            const map = json.map(it => it.data())
-            this.countries = map
-          }
-        )
-      },
-      onTableChange(params) {
-        console.log(params);
-      },
-      onSelectChange(keys, items) {
-        this.selectedItems = items;
-        if (items.length > 0) {
-          // this.current = this.data.find(it => it.countryId = items[0].countryId)
-          this.current = items[0]
-          this.hasSelect = true;
-        } else {
-          this.hasSelect = false;
-        }
-      },
-      handleEdit() {
-        if(this.selectedItems.length > 1){
-          this.$modal.alert({
-            content: '请只选择一项进行修改'
-          })
-          return
-        }
-        this.isShow = true;
-      },
-      handleCreate(){
-        this.current = {}
-        this.isShow = true;
-      },
-      handleDelete(){
-        if(this.selectedItems.length > 1){
-          this.$modal.alert({
-            content: '请只选择一项进行操作'
-          })
-          return
-        }
-        this.$modal.confirm({
-          content: `请确认删除: ${this.current.nameCn}`,
-          onOk: this.delete
-        })
-      },
-      save(){
-        const entity = new this.$spring.Country(this.current)
-        // find.patchData(this.current)
-        // find.save()
-        entity.save()
-          .then(this.success).catch(this.fail)
-      },
-      delete(){
-        this.$spring.Country.remove(this.current.countryId).then(this.success).catch(this.fail)
-      },
-      success(json){
-        this.getData()
-        this.$notify.info({content: '操作成功'})
-      },
-      fail(err){
-        console.log(err)
-        this.$modal.alert({
-          content: '操作失败！请联系管理员'
-        })
-      },
-      find(){
-        const word = this.word;
-        const filter = this.data.map(it => it.data()).filter(
-          it => it.nameCn.includes(word) || it.nameEn.includes(word) || it.code.includes(this.word))
-        if(filter.length == 0 ){
-          this.$modal.alert({
-            content: '未查到结果,请更换搜索词,或使用高级搜索'
-          })
-          return
-        }
-        this.countries = filter
-      },
-      search(){}
-    },
-    computed: {
-      dataSource2() {
-        return data.slice(0, 9);
-      },
-    },
-
+    mixins: [crud],
+    created(){
+      this.entityClass = this.$spring.Country
+      // this.db.ports = this.data
+    }
   }
 </script>
 

@@ -95,6 +95,15 @@
 <!--                  <select v-model="current.countryNameCn">
                     <option v-for="it,idx in regionId" :key="idx" :value="idx">{{it}} </option>
                   </select>-->
+<!--                  <b-autocomplete
+                    v-model="current.countryId"
+                    placeholder="区域"
+                    :keep-first="keepFirst"
+                    :open-on-focus="openOnFocus"
+                    :data="filteredDataObj"
+                    field="user.first_name"
+                    @select="option => selected = option">
+                  </b-autocomplete>-->
                 </div>
               </div>
             </div>
@@ -121,7 +130,8 @@
 
     mixins: [crud],
     created(){
-      this.entityClass = this.$spring.PortView
+      this.entityClass = this.$spring.Port
+      this.db.ports = this.data
     }
 
 

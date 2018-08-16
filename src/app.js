@@ -13,7 +13,12 @@ import VueBlu from 'vue-blu'
 import 'vue-blu/dist/css/vue-blu.min.css'
 Vue.use(VueBlu)
 
+import Buefy from 'buefy'
+// import 'buefy/lib/buefy.css'
+// Vue.use(Buefy)
+
 import Promise from 'es6-promise'
+Promise.polyfill()
 // 引入 网络请求模块
 import http from './utils/http.js';
 Vue.prototype.$http = http;
@@ -35,10 +40,14 @@ spring.SeaexpresspriceView = spring.extend('seaexpresspriceviews')
 
 Vue.prototype.$spring = spring;
 
-Promise.polyfill()
+Vue.prototype.$db = {};
+
+spring.Country.findAll().then(json => Vue.prototype.$db.country = json)
+
 Vue.use(NProgress)
-Vue.use(VueI18n)
 Vue.component('demo-section', DemoSection)
+
+Vue.use(VueI18n)
 
 const i18n = new VueI18n({
   locale: 'zh-CN',

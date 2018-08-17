@@ -160,11 +160,6 @@
   }
 </script>
 
-<style lang="scss">
-.table-responsive {
-  display: block;
-  width: 100%;
-  min-height: .01%;
-  overflow-x: auto;
-}
+<style lang="scss" scoped>
+  @import '../../node_modules/buefy/lib/buefy.css';
 </style>

@@ -26,7 +26,7 @@
                   </a>
                 </div>
                 <div class="level-item">
-                  <a class="button is-danger" @click="handleDelete">
+                  <a class="button is-danger" @click="handleDelete" :class="{'is-disabled': !hasSelect}">
 										<span class="icon is-small">
 											<i class="fa fa-remove"></i>
 										</span>
@@ -168,11 +168,6 @@
 </script>
 
 
-<style lang="scss">
-.table-responsive {
-  display: block;
-  width: 100%;
-  min-height: .01%;
-  overflow-x: auto;
-}
+<style lang="scss" scoped>
+@import '../../node_modules/buefy/lib/buefy.css';
 </style>

@@ -26,7 +26,7 @@
                   </a>
                 </div>
                 <div class="level-item">
-                  <a class="button is-danger" @click="handleDelete">
+                  <a class="button is-danger" @click="handleDelete" :class="{'is-disabled': !hasSelect}">
 										<span class="icon is-small">
 											<i class="fa fa-remove"></i>
 										</span>

@@ -14,7 +14,7 @@ import 'vue-blu/dist/css/vue-blu.min.css'
 Vue.use(VueBlu)
 
 import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+// import 'buefy/lib/buefy.css'
 Vue.use(Buefy)
 
 import Promise from 'es6-promise'

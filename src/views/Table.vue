@@ -4,6 +4,71 @@
       <div class="tile is-parent">
         <article class="tile is-child box">
           <!--<h4 class="title">报价信息</h4>-->
+          <div class="control is-horizontal">
+
+            <div class="control-label">
+              <label class="label">港口</label>
+            </div>
+            <div class="control" is-grouped>
+              <div class="select is-expanded">
+                <b-autocomplete
+                  :value="portName(current.routeLinePortLoadId)"
+                  @input="value => input = value"
+                  placeholder="起始港"
+                  :data="filteredDataObj"
+                  field="nameCn"
+                  :open-on-focus="true"
+                  @select="option => current.routeLinePortLoadId = option.portId">
+                </b-autocomplete>
+              </div>
+
+              <div class="select is-expanded" >
+                <b-autocomplete
+                  :value="portName(current.routeLinePortDischargeId)"
+                  @input="value => input = value"
+                  placeholder="目的港"
+                  :data="filteredDataObj"
+                  field="nameCn"
+                  :open-on-focus="true"
+                  @select="option => current.routeLinePortDischargeId = option.portId">
+                </b-autocomplete>
+              </div>
+            </div>
+
+            <div class="control">
+            <div class="control-label">
+              <label class="label">承运公司</label>
+            </div>
+            <div class="control">
+              <div class="select">
+                <b-autocomplete
+                  :value="carrierName(current.waiPeiCompanyId)"
+                  @input="value => input = value"
+                  placeholder="承运公司"
+                  :data="filteredData"
+                  field="nameCn"
+                  :open-on-focus="true"
+                  @select="option => current.waiPeiCompanyId = option.carrierId">
+                </b-autocomplete>
+              </div>
+            </div>
+            </div>
+
+            <div class="control">
+              <div class="control-label">
+                <label class="label">生效日期</label>
+              </div>
+              <div class="control">
+                <p class="control">
+                  <input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">
+                </p>
+              </div>
+            </div>
+
+            <div class="level-item">
+              <button class="button is-info" @click="search">搜索</button>
+            </div>
+          </div>
 
           <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id"
                       :on-select-change="onSelectChange"
@@ -14,12 +79,9 @@
               <template slot="right">
                 <div class="level-item">
                   <p class="control has-addons">
-                    <input class="input" placeholder="查找条件" v-model="word">
-                    <button class="button" @click="find">搜索</button>
+                    <input class="input" placeholder="过滤条件" v-model="word">
+                    <button class="button" @click="find">过滤</button>
                   </p>
-                </div>
-                <div class="level-item">
-                  <button class="button is-info" @click="search">高级搜索</button>
                 </div>
               </template>
             </table-toolbar>
@@ -66,68 +128,6 @@
 
             <div class="control is-horizontal">
               <div class="control-label">
-                <label class="label">港口</label>
-              </div>
-              <div class="control" is-grouped>
-                <div class="select is-expanded">
-                  <b-autocomplete
-                    :value="portName(current.routeLinePortLoadId)"
-                    @input="value => input = value"
-                    placeholder="起始港"
-                    :data="filteredDataObj"
-                    field="nameCn"
-                    :open-on-focus="true"
-                    @select="option => current.routeLinePortLoadId = option.portId">
-                  </b-autocomplete>
-                </div>
-
-                <div class="select is-expanded">
-                  <b-autocomplete
-                    :value="portName(current.transPortId)"
-                    @input="value => input = value"
-                    placeholder="中转港"
-                    :data="filteredDataObj"
-                    field="nameCn"
-                    :open-on-focus="true"
-                    @select="option => current.transPortId = option.portId">
-                  </b-autocomplete>
-                </div>
-
-                <div class="select is-expanded" >
-                  <b-autocomplete
-                    :value="portName(current.routeLinePortDischargeId)"
-                    @input="value => input = value"
-                    placeholder="目的港"
-                    :data="filteredDataObj"
-                    field="nameCn"
-                    :open-on-focus="true"
-                    @select="option => current.routeLinePortDischargeId = option.portId">
-                  </b-autocomplete>
-                </div>
-              </div>
-            </div>
-
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">承运公司</label>
-              </div>
-              <div class="control">
-                <div class="select is-fullwidth">
-                  <b-autocomplete
-                    :value="carrierName(current.waiPeiCompanyId)"
-                    @input="value => input = value"
-                    placeholder="承运公司"
-                    :data="filteredData"
-                    field="nameCn"
-                    :open-on-focus="true"
-                    @select="option => current.waiPeiCompanyId = option.carrierId">
-                  </b-autocomplete>
-                </div>
-              </div>
-            </div>
-
-            <div class="control is-horizontal">
-              <div class="control-label">
                 <label class="label">运价</label>
               </div>
               <div class="control is-grouped">
@@ -156,20 +156,6 @@
               <div class="control">
                 <p class="control is-fullwidth">
                   <input class="input" placeholder="船期" v-model="current.schedule">
-                </p>
-              </div>
-            </div>
-
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">生效日期</label>
-              </div>
-              <div class="control is-grouped">
-                <p class="control is-expanded">
-                  <input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" placeholder="运输模式" v-model="current.transMode">
                 </p>
               </div>
             </div>

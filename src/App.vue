@@ -20,6 +20,11 @@ import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
 import { Navbar, FooterBar } from 'components/layout'
 import { mapGetters, mapActions } from 'vuex'
 
+// function findTotal(entityClass) {
+//   return entityClass.findAll().then(json => entityClass.findAll({size: json.page.totalElements}))
+//   // .then(json => Vue.prototype.$db.country = json)
+// }
+
 export default {
   components: {
     Navbar,
@@ -31,6 +36,13 @@ export default {
     'toggleDevice',
     'toggleSidebar'
   ]),
+
+  // created(){
+  //   const db = this.$db;
+  //   findTotal(this.$spring.Country).then(json => db.country = json)
+  //   findTotal(this.$spring.Port).then(json => db.port = json)
+  //   findTotal(this.$spring.Carrier).then(json => db.carrier = json)
+  // },
 
   beforeMount () {
     const { body } = document

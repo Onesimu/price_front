@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import NProgress from 'vue-nprogress'
-import DemoSection from 'components/DemoSection'
 import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import router from './router'
@@ -40,7 +39,7 @@ spring.SeaexpresspriceView = spring.extend('seaexpresspriceviews')
 
 Vue.prototype.$spring = spring;
 
-Vue.prototype.$db = {};
+Vue.prototype.$db = {country:[],port:[],carrier:[]};
 
 function findTotal(entityClass) {
   return entityClass.findAll().then(json => entityClass.findAll({size: json.page.totalElements}))
@@ -53,7 +52,6 @@ findTotal(spring.Port).then(json => db.port = json)
 findTotal(spring.Carrier).then(json => db.carrier = json)
 
 Vue.use(NProgress)
-Vue.component('demo-section', DemoSection)
 
 Vue.use(VueI18n)
 

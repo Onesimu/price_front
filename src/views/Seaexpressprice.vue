@@ -65,11 +65,11 @@
               </template>
             </column>
             <!--<column label="生效日期" field="fromDate"></column>-->
-            <column label="20GP" field="publicPrice_20Gp"></column>
-            <column label="40GP" field="publicPrice_40Gp"></column>
-            <column label="40HQ" field="publicPrice_40Hq"></column>
-            <column label="45HQ" field="publicPrice_45Hq"></column>
-            <column label="40RD" field="publicPrice_40Rd"></column>
+            <column label="20GP" field="publicPrice_20Gp" sorter="custom"></column>
+            <column label="40GP" field="publicPrice_40Gp" sorter="custom"></column>
+            <column label="40HQ" field="publicPrice_40Hq" sorter="custom"></column>
+            <column label="45HQ" field="publicPrice_45Hq" sorter="custom"></column>
+            <column label="40RD" field="publicPrice_40Rd" sorter="custom"></column>
             <column label="公司" field="waiPeiCompanyId">
               <template slot-scope="row">
                 <span>{{ carrierName(row.waiPeiCompanyId) }}</span>
@@ -77,7 +77,7 @@
             </column>
             <column label="船期" field="schedule"></column>
             <column label="运输模式" field="transMode"></column>
-            <column label="生效日期" field="fromDate">
+            <column label="生效日期" field="fromDate" sorter="custom">
               <template slot-scope="row">
                 <span>{{ getDate(row.fromDate) }}</span>
                 <!--<span>{{ row.fromDate && row.fromDate.toLocaleDateString() }}</span>-->
@@ -273,5 +273,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../node_modules/buefy/lib/buefy.css';
+  /*@import '../../node_modules/buefy/lib/buefy.css';*/
 </style>

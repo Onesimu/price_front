@@ -168,5 +168,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import '../../node_modules/buefy/lib/buefy.css';
+/*@import '../../node_modules/buefy/lib/buefy.css';*/
 </style>

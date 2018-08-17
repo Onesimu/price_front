@@ -97,7 +97,7 @@ export default {
     find() {
       const word = this.word;
       const filter = this.data.map(it => it.data()).filter(
-        it => it.nameCn.includes(word) || it.nameEn.includes(word) || it.code.includes(this.word))
+        it => ('' + it.nameCn + it.nameEn + it.code).includes(this.word))
       if (filter.length == 0) {
         this.$modal.alert({
           content: '未查到结果,请更换搜索词,或使用高级搜索'

@@ -50,6 +50,7 @@ function findTotal(entityClass) {
 const db = Vue.prototype.$db;
 findTotal(spring.Country).then(json => db.country = json)
 findTotal(spring.Port).then(json => db.port = json)
+findTotal(spring.Carrier).then(json => db.carrier = json)
 
 Vue.use(NProgress)
 Vue.component('demo-section', DemoSection)

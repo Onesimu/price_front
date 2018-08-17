@@ -5,8 +5,9 @@
         <article class="tile is-child box">
           <h4 class="title">报价信息</h4>
 
-          <data-table :data="viewData" striped checkable show-index :pagination="pagination" rowKey="id" :on-select-change="onSelectChange"
-                      :change="onTableChange" >
+          <data-table :data="viewData" striped checkable :pagination="pagination" rowKey="id"
+                      :on-select-change="onSelectChange"
+                      :change="onTableChange">
             <table-toolbar has-refresh has-columns-control>
               <template slot="left">
                 <div class="level-item">
@@ -47,73 +48,109 @@
               </template>
             </table-toolbar>
 
-            <column label="报价编号" field="sePriceId"></column>
-            <column label="装货港" field="routeLinePortLoadId" sorter="custom">
+            <!--<column label="报价编号" field="sePriceId"></column>-->
+            <column label="起始港" field="routeLinePortLoadId">
               <template slot-scope="row">
                 <span>{{ portName(row.routeLinePortLoadId) }}</span>
               </template>
             </column>
-            <column label="卸货港" field="routeLinePortDischargeId" sorter="custom">
+            <column label="目的港" field="routeLinePortDischargeId">
               <template slot-scope="row">
                 <span>{{ portName(row.routeLinePortDischargeId) }}</span>
               </template>
             </column>
-            <column label="中转港" field="transPortId" sorter="custom">
+            <column label="中转港" field="transPortId">
               <template slot-scope="row">
                 <span>{{ portName(row.transPortId) }}</span>
+              </template>
+            </column>
+            <!--<column label="生效日期" field="fromDate"></column>-->
+            <column label="20GP" field="publicPrice_20Gp"></column>
+            <column label="40GP" field="publicPrice_40Gp"></column>
+            <column label="40HQ" field="publicPrice_40Hq"></column>
+            <column label="45HQ" field="publicPrice_45Hq"></column>
+            <column label="40RD" field="publicPrice_40Rd"></column>
+            <column label="公司" field="waiPeiCompanyId">
+              <template slot-scope="row">
+                <span>{{ carrierName(row.waiPeiCompanyId) }}</span>
+              </template>
+            </column>
+            <column label="船期" field="schedule"></column>
+            <column label="运输模式" field="transMode"></column>
+            <column label="生效日期" field="fromDate">
+              <template slot-scope="row">
+                <span>{{ getDate(row.fromDate) }}</span>
+                <!--<span>{{ row.fromDate && row.fromDate.toLocaleDateString() }}</span>-->
               </template>
             </column>
           </data-table>
 
           <modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false"
                  ok-text="确定" cancel-text="取消" :backdrop-closable="false" :on-ok="save">
+
             <div class="control is-horizontal">
               <div class="control-label">
-                <label class="label">公司</label>
-              </div>
-              <div class="control is-grouped">
-                <p class="control is-expanded">
-                  <input class="input" type="text" placeholder="中文名" v-model="current.nameCn">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" type="email" placeholder="英文名" v-model="current.nameEn">
-                </p>
-              </div>
-            </div>
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">代码</label>
-              </div>
-              <div class="control">
-                <p class="control is-expanded">
-                  <input class="input" type="email" placeholder="代码" v-model="current.code">
-                </p>
-              </div>
-            </div>
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">区域</label>
+                <label class="label">起始港</label>
               </div>
               <div class="control">
                 <div class="select is-fullwidth">
                   <b-autocomplete
-                    :value="portName(current)"
+                    :value="portName(current.routeLinePortLoadId)"
                     @input="value => input = value"
-                    placeholder="区域"
+                    placeholder="起始港"
                     :data="filteredDataObj"
                     field="nameCn"
                     :open-on-focus="true"
-                    @select="option => current.countryId = option.countryId">
+                    @select="option => current.routeLinePortLoadId = option.portId">
                   </b-autocomplete>
                 </div>
               </div>
             </div>
+
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">目的港</label>
+              </div>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <b-autocomplete
+                    :value="portName(current.routeLinePortDischargeId)"
+                    @input="value => input = value"
+                    placeholder="目的港"
+                    :data="filteredDataObj"
+                    field="nameCn"
+                    :open-on-focus="true"
+                    @select="option => current.routeLinePortDischargeId = option.portId">
+                  </b-autocomplete>
+                </div>
+              </div>
+            </div>
+
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">中转港</label>
+              </div>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <b-autocomplete
+                    :value="portName(current.transPortId)"
+                    @input="value => input = value"
+                    placeholder="中转港"
+                    :data="filteredDataObj"
+                    field="nameCn"
+                    :open-on-focus="true"
+                    @select="option => current.transPortId = option.portId">
+                  </b-autocomplete>
+                </div>
+              </div>
+            </div>
+
             <div class="control is-horizontal">
               <div class="control-label">
                 <label class="label">备注</label>
               </div>
               <div class="control">
-                <textarea class="textarea" placeholder="添加备注信息" :value="selected.countryId">{{selected.id}}</textarea>
+                <textarea class="textarea" placeholder="添加备注信息"></textarea>
               </div>
             </div>
           </modal>
@@ -127,27 +164,34 @@
 
 <script>
   import crud from "./crud"
+  import {getDate} from "../utils/constants";
+
   export default {
 
     data() {
       return {
         // country:[],
         selected: {},
-        input:''
+        input: ''
       }
     },
     mixins: [crud],
-    created(){
+    created() {
       this.entityClass = this.$spring.Seaexpressprice
       // this.db.ports = this.data
       // this.country = this.$db.country.map(it => it.data())
     },
-    methods:{
-      portName(item = this.current.portId){
+    methods: {
+      portName(item = this.current.portId) {
         // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)
         return find ? find.nameCn : ''
-      }
+      },
+      carrierName(item = this.current.waiPeiCompanyId){
+        const find = this.carrier.find(it => it.carrierId == item)
+        return find ? find.code : ''
+      },
+      getDate: getDate
     },
     computed: {
       filteredDataObj() {
@@ -159,8 +203,11 @@
           // .indexOf(this.current.toLowerCase()) >= 0
         })
       },
-      port(){
+      port() {
         return this.$db.port.map(it => it.data())
+      },
+      carrier(){
+        return this.$db.carrier.map(it => it.data())
       }
     }
 

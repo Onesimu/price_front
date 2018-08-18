@@ -35,7 +35,11 @@ export default [
 			{
 				name: 'Userinfo',
 				icon: 'fa-window-maximize'
-			}
+			},
+      {
+        name: 'UserEdit',
+        icon: 'fa-window-maximize'
+      }
     ]
   }
 ]

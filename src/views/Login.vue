@@ -9,19 +9,12 @@
         <form v-on:submit.prevent="login">
           <label class="label">用户名</label>
           <p class="control">
-            <input v-model="data.body.username" class="input" type="text" placeholder="请输入用户名">
+            <input v-model="data.body.username" class="input" type="text" placeholder="请输入用户名" required>
           </p>
           <label class="label">密码</label>
           <p class="control">
-            <input v-model="data.body.password" class="input" type="password" placeholder="请输入密码">
+            <input v-model="data.body.password" class="input" type="password" placeholder="请输入密码" required>
           </p>
-
-<!--          <p class="control">
-            <label class="checkbox">
-              <input type="checkbox" v-model="data.rememberMe">
-              Remember me
-            </label>
-          </p> -->
 
           <hr>
           <p class="control">

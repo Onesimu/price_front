@@ -35,6 +35,7 @@ export default {
 		carrier:'航运公司',
 		country:'国家地区',
 		seaexpressprice:'航运报价',
-		userinfo:'用户信息'
+		userinfo:'用户管理',
+    useredit:'用户信息'
   }
 };

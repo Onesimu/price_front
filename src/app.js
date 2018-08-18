@@ -39,6 +39,8 @@ spring.SeaexpresspriceView = spring.extend('seaexpresspriceviews')
 
 Vue.prototype.$spring = spring;
 
+Vue.prototype.$db = {country:[],port:[],carrier:[]};
+
 Vue.use(NProgress)
 
 Vue.use(VueI18n)

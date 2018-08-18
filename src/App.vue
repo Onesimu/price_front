@@ -32,11 +32,13 @@ export default {
     'toggleSidebar'
   ]),
 
-  created(){
-    const findTotal = (entityClass) => {
-      return entityClass.findAll().then(json => entityClass.findAll({size: json.page.totalElements}))
+  async created(){
+    const findTotal = async (entityClass) => {
+      const json = await entityClass.findAll()
+      return entityClass.findAll({size: json.page.totalElements})
     }
-    findTotal(this.$spring.Country).then(json => this.$store.commit('country',json))
+    const json = await findTotal(this.$spring.Country)
+    this.$store.commit('country',json)
     findTotal(this.$spring.Port).then(json => this.$store.commit('port',json))
     findTotal(this.$spring.Carrier).then(json => this.$store.commit('carrier',json))
   },

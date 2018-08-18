@@ -49,7 +49,7 @@ export default {
 
   watch: {
     '$route.name' (newvg) {
-      console.log(newvg)
+      // console.log(newvg)
       anchor.adjust()
     }
   }

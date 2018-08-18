@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content has-text-centered">
         <p class="social">
-          <a href="https://github.com/vue-bulma/vue-bulma-tutorial">
+          <a href="#">
             联系我们
           </a>
         </p>

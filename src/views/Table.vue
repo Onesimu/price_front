@@ -207,7 +207,7 @@
         return find ? find.nameCn : ''
       },
       getDate: getDate,
-      search(){
+      localSearch(){
         const search = this.current
         const precict = it =>
           search.routeLinePortLoadId === it.routeLinePortLoadId &&
@@ -220,6 +220,17 @@
           return
         }
         this.viewData = filter
+      },
+      async search() {
+        const search = this.current
+        const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
+          if (json.length == 0) {
+            this.$notify.info({
+              content: '未查到结果'
+            })
+            return
+          }
+        this.viewData = json.map(it => it.data())
       }
     },
     computed: {

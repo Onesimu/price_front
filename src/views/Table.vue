@@ -59,13 +59,13 @@
                 <label class="label">生效日期</label>
               </div>
               <div class="control">
-                <p class="control">
+                <p class="control" has-addons>
                   <input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">
                 </p>
               </div>
             </div>
 
-            <div class="level-item">
+            <div>
               <button class="button is-info" @click="search">搜索</button>
             </div>
           </div>
@@ -206,7 +206,21 @@
         const find = this.carrier.find(it => it.carrierId == item)
         return find ? find.nameCn : ''
       },
-      getDate: getDate
+      getDate: getDate,
+      search(){
+        const search = this.current
+        const precict = it =>
+          search.routeLinePortLoadId === it.routeLinePortLoadId &&
+          search.routeLinePortDischargeId === it.routeLinePortDischargeId
+        const filter = this.data.map(it => it.data()).filter(precict)
+        if (filter.length == 0) {
+          this.$notify.info({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      }
     },
     computed: {
       filteredDataObj() {

@@ -38,6 +38,7 @@ export default {
   },
 
   mounted () {
+    this.$router.push('/manual/zh-CN/seaexpressprice')
     anchor.adjust()
   },
 

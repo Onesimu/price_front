@@ -48,23 +48,8 @@
             {{$t('header.nav[1]')}}
           </router-link>
 					<router-link class="nav-item hvr-underline-from-center" to="/login">
-						{{$t('header.nav[2]')}}
+						{{$t('header.nav[3]')}}
 					</router-link>
-          <span class="nav-item tour-drop-down" 
-            @mouseenter="showLangs = true" 
-            @mouseleave="showLangs = false">
-            {{$t('header.nav[3]')}}
-            <span class="icon">
-              <i class="fa fa-caret-down"></i>
-            </span>
-            <ul class="tour-drop-down-list" v-show="showLangs">
-              <li v-for="(text, lang) in langs" class="hvr-shadow-radial">
-                 <a href="javascript:void(0);"
-                   :class="{ 'is-active': $i18n.locale === lang }"
-                   @click="setLang(lang)">{{text}}</a>
-              </li>
-            </ul>
-          </span>
         </div>
       </nav>
     </div>

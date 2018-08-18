@@ -114,6 +114,7 @@
 
 	</div>
 </template>
+
 <script>
   import {regionId} from '../utils/constants'
   import crud from "./crud"
@@ -134,10 +135,4 @@
 
 
 <style lang="scss">
-	.table-responsive {
-		display: block;
-		width: 100%;
-		min-height: .01%;
-		overflow-x: auto;
-	}
 </style>

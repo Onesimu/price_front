@@ -6,12 +6,16 @@ export default {
     return {
       viewData: [],
       data: [],
-      db:db,
+      db: db,
       hasSelect: false,
       isShow: false,
       selectedItems: [],
       current: {},
-      pagination: {total: 0},
+      pagination: {
+        total: 0, pageSize: 20,
+        sizeOptions: [20, 50, 100],
+        change: this.changePage
+      },
       word: '',
       entityClass: {}
     }
@@ -36,14 +40,20 @@ export default {
         }
       )
     },
+    changePage(page) {
+      // console.log(page)
+    },
     onTableChange(params) {
-      console.log(params);
+      // console.log(params)
+      this.getData()
     },
     onSelectChange(keys, items) {
-      this.selectedItems = items;
       if (items.length > 0) {
-        // this.current = this.data.find(it => it.countryId = items[0].countryId)
-        this.current = items[0]
+        if (items.length > 1) {
+          items.shift()
+        }
+        this.selectedItems = items;
+        this.current = items[items.length - 1]
         this.hasSelect = true;
       } else {
         this.hasSelect = false;

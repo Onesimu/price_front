@@ -28,10 +28,6 @@ export default [
     expanded: false,
 
     children: [
-      {
-        name: 'Seaexpressprice',
-        icon: 'fa-window-maximize'
-      },
 			{
 				name: 'Userinfo',
 				icon: 'fa-window-maximize'

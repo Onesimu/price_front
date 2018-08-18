@@ -29,7 +29,7 @@ export default {
     basic: '基础信息',
     button: '按钮',
     icon: '图标',
-    interact: '报价维护',
+    interact: '系统维护',
     collapse: '折叠组件',
 		port:'港口信息',
 		carrier:'航运公司',

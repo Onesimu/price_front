@@ -48,7 +48,7 @@
             {{$t('header.nav[1]')}}
           </router-link>
 					<router-link class="nav-item hvr-underline-from-center" to="/login">
-						{{$t('header.nav[3]')}}
+						{{$t('header.nav[2]')}}
 					</router-link>
         </div>
       </nav>

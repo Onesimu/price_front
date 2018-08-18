@@ -38,6 +38,11 @@ export default {
   },
 
   mounted () {
+    if(!this.$db.user){
+      this.$notify.danger({content:'请先登录'})
+      this.$router.push('/login')
+      return
+    }
     this.$router.push('/manual/zh-CN/seaexpressprice')
     anchor.adjust()
   },

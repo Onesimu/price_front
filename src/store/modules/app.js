@@ -16,10 +16,20 @@ const state = {
   },
   effect: {
     translate3d: true
-  }
+  },
+  db:{country:[],port:[],carrier:[]}
 }
 
 const mutations = {
+  country(state,country){
+    state.db.country = country
+  },
+  port(state,port){
+    state.db.port = port
+  },
+  carrier(state,carrier){
+    state.db.carrier = carrier
+  },
   [types.TOGGLE_DEVICE] (state, device) {
     state.device.isMobile = device === 'mobile'
     state.device.isTablet = device === 'tablet'

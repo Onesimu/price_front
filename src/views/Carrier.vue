@@ -154,7 +154,7 @@
         })
       },
       country(){
-        return this.$db.country.map(it => it.data())
+        return this.$store.state.app.db.country.map(it => it.data())
       }
     }
 

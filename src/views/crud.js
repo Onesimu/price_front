@@ -12,9 +12,7 @@ export default {
       selectedItems: [],
       current: {},
       pagination: {
-        total: 0, pageSize: 20,
-        sizeOptions: [20, 50, 100],
-        change: this.changePage
+        total: 0
       },
       word: '',
       entityClass: {}

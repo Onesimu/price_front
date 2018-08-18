@@ -263,10 +263,10 @@
         })
       },
       port() {
-        return this.$db.port.map(it => it.data())
+        return this.$store.state.app.db.port.map(it => it.data())
       },
       carrier(){
-        return this.$db.carrier.map(it => it.data())
+        return this.$store.state.app.db.carrier.map(it => it.data())
       }
     }
 

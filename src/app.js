@@ -39,18 +39,6 @@ spring.SeaexpresspriceView = spring.extend('seaexpresspriceviews')
 
 Vue.prototype.$spring = spring;
 
-Vue.prototype.$db = {country:[],port:[],carrier:[]};
-
-function findTotal(entityClass) {
-  return entityClass.findAll().then(json => entityClass.findAll({size: json.page.totalElements}))
-    // .then(json => Vue.prototype.$db.country = json)
-}
-
-const db = Vue.prototype.$db;
-findTotal(spring.Country).then(json => db.country = json)
-findTotal(spring.Port).then(json => db.port = json)
-findTotal(spring.Carrier).then(json => db.carrier = json)
-
 Vue.use(NProgress)
 
 Vue.use(VueI18n)

@@ -52,23 +52,27 @@ export default {
     }
   },
   mounted () {
-//     if (this.$auth.redirect()) {
-//       console.log('Redirect from: ' + this.$auth.redirect().from.name)
-//     }
-    // Can set query parameter here for auth redirect or just do it silently in login redirect.
   },
   methods: {
+    async findUser (body) {
+      const data = await this.$spring.Userinfo.search('findByStaffNameAndPassword', body)
+      if (data.data()) {
+        this.$db.user = data.data()
+        this.$router.push('/manual')
+        this.$notify.info({content: '欢迎登录'})
+      } else {
+        this.$notify.danger({content: '登录失败'})
+      }
+    },
     async login () {
-			var data = await this.$http.get('carriers');
-			console.log(data);
-		}
+      const body = this.data.body;
+      body.staffName = body.username
+      this.findUser(body).catch(err => {
+        console.log(err)
+        this.$notify.danger({content: '用户名或密码错'})
+      })
+    }
   }
-  // filters: {
-  //   json: function (value) {
-  //     console.log(value)
-  //     return value
-  //   }
-  // }
 
 }
 </script>

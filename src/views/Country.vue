@@ -41,9 +41,9 @@
 										<button class="button" @click="find">搜索</button>
 									</p>
 								</div>
-                <div class="level-item">
+<!--                <div class="level-item">
                   <button class="button is-info" @click="search">高级搜索</button>
-                </div>
+                </div>-->
               </template>
 						</table-toolbar>
 
@@ -59,6 +59,7 @@
                 <span>{{ regionId[row.regionId] }}</span>
               </template>
             </column>
+            <column label="备注" field="remark"></column>
 					</data-table>
 
 					<modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false"

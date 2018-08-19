@@ -133,8 +133,7 @@
     mixins: [crud],
     created(){
       this.entityClass = this.$spring.Carrier
-      // this.db.ports = this.data
-      // this.country = this.$db.country.map(it => it.data())
+      this.columns = ['nameCn','nameEn','code']
     },
     methods:{
       countryName(item = this.current){

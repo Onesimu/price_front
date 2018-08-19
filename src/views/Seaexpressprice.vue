@@ -254,7 +254,20 @@
         const find = this.carrier.find(it => it.carrierId == item)
         return find ? find.nameCn : ''
       },
-      getDate: getDate
+      getDate: getDate,
+      find() {
+        const word = this.word;
+        const filter = this.data.map(it => it.data()).filter(
+          it => [this.portName(it.routeLinePortLoadId),this.portName(it.routeLinePortDischargeId),this.carrierName(it.carrierId)]
+            .join().includes(word))
+        if (filter.length == 0) {
+          this.$notify.warning({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      },
     },
     computed: {
       filteredDataObj() {

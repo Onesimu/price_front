@@ -135,7 +135,7 @@
     mixins: [crud],
     created(){
       this.entityClass = this.$spring.Userinfo
-      // this.db.ports = this.data
+      this.columns = ['staffName','tel','email']
     },
     methods:{
       saveUser(){

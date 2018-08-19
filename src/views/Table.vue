@@ -198,8 +198,7 @@
     mixins: [crud],
     created() {
       this.entityClass = this.$spring.Seaexpressprice
-      // this.db.ports = this.data
-      // this.country = this.$db.country.map(it => it.data())
+      this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
     },
     methods: {
       portName(item = this.current.portId) {
@@ -212,6 +211,19 @@
         return find ? find.nameCn : ''
       },
       getDate: getDate,
+      find() {
+        const word = this.word;
+        const filter = this.data.map(it => it.data()).filter(
+          it => [this.portName(it.routeLinePortLoadId),this.portName(it.routeLinePortDischargeId),this.carrierName(it.carrierId)]
+            .join().includes(word))
+        if (filter.length == 0) {
+          this.$notify.warning({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      },
       localSearch(){
         const search = this.current
         const predict = it =>

@@ -104,8 +104,10 @@ export default {
     },
     find() {
       const word = this.word;
+      // const text = '' + it.nameCn + it.nameEn + it.code
+      const filterNames = this.columns
       const filter = this.data.map(it => it.data()).filter(
-        it => ('' + it.nameCn + it.nameEn + it.code).includes(this.word))
+        it => filterNames.map(i => it[i]).join().includes(word))
       if (filter.length == 0) {
         this.$notify.warning({
           content: '未查到结果'

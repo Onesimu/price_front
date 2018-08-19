@@ -129,7 +129,7 @@
     mixins: [crud],
     created(){
       this.entityClass = this.$spring.Country
-      // this.db.ports = this.data
+      this.columns = ['nameCn','nameEn','code']
     }
   }
 </script>

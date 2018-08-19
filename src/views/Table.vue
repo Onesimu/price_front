@@ -18,7 +18,7 @@
                   :data="filteredDataObj"
                   field="nameCn"
                   :open-on-focus="true"
-                  @select="option => current.routeLinePortLoadId = option.portId">
+                  @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
                 </b-autocomplete>
               </div>
 
@@ -30,7 +30,7 @@
                   :data="filteredDataObj"
                   field="nameCn"
                   :open-on-focus="true"
-                  @select="option => current.routeLinePortDischargeId = option.portId">
+                  @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
                 </b-autocomplete>
               </div>
             </div>
@@ -48,7 +48,7 @@
                   :data="filteredData"
                   field="nameCn"
                   :open-on-focus="true"
-                  @select="option => current.waiPeiCompanyId = option.carrierId">
+                  @select="option => current.waiPeiCompanyId = option && option.carrierId">
                 </b-autocomplete>
               </div>
             </div>
@@ -214,10 +214,10 @@
       getDate: getDate,
       localSearch(){
         const search = this.current
-        const precict = it =>
+        const predict = it =>
           search.routeLinePortLoadId === it.routeLinePortLoadId &&
           search.routeLinePortDischargeId === it.routeLinePortDischargeId
-        const filter = this.data.map(it => it.data()).filter(precict)
+        const filter = this.data.map(it => it.data()).filter(predict)
         if (filter.length == 0) {
           this.$notify.info({
             content: '未查到结果'
@@ -229,13 +229,26 @@
       async search() {
         const search = this.current
         const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
-          if (json.length == 0) {
-            this.$notify.info({
-              content: '未查到结果'
-            })
-            return
-          }
-        this.viewData = json.map(it => it.data())
+
+        let predict = it => true
+        if(search.waiPeiCompanyId){
+           predict = it =>
+           search.waiPeiCompanyId === it.waiPeiCompanyId
+        }
+        if(search.fromDate){
+          predict = it =>
+            search.waiPeiCompanyId === it.waiPeiCompanyId &&
+            it.fromDate.startsWith(search.fromDate)
+        }
+
+        const filter = json.map(it => it.data()).filter(predict)
+        if (filter.length == 0) {
+          this.$notify.info({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
       }
     },
     computed: {

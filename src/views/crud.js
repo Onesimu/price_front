@@ -78,7 +78,7 @@ export default {
         return
       }
       this.$modal.confirm({
-        content: `请确认删除: ${this.current.nameCn}`,
+        content: `确认删除吗?`,
         onOk: this.delete
       })
     },

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-// import "regenerator-runtime/runtime";
+  import crypto from 'crypto'
 export default {
 
   data () {
@@ -60,6 +60,7 @@ export default {
     async login () {
       const body = this.data.body;
       body.staffName = body.username
+      body.password = crypto.createHash('md5').update(body.password).digest('hex')
       this.findUser(body).catch(err => {
         console.log(err)
         this.$notify.danger({content: '用户名或密码错'})

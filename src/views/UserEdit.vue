@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import crypto from 'crypto'
   export default {
 
     data () {
@@ -72,10 +73,12 @@
           this.$notify.danger({content:'确认密码不一致'})
           return
         }
-        if(body.old != this.$db.user.password){
+        const old = crypto.createHash('md5').update(body.old).digest('hex')
+        if(old != this.$db.user.password){
           this.$notify.danger({content:'原密码不正确'})
           return
         }
+        body.password = crypto.createHash('md5').update(body.password).digest('hex')
         this.findUser(body).catch(err => {
           console.log(err)
           this.$notify.danger({content: '修改失败'})

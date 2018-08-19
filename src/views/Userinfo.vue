@@ -124,6 +124,7 @@
 </template>
 
 <script>
+  import crypto from 'crypto'
   import crud from "./crud"
   export default {
 
@@ -138,7 +139,8 @@
     },
     methods:{
       saveUser(){
-        this.current.password = this.current.tel || '999999'
+        const password = this.current.tel || '999999';
+        this.current.password = crypto.createHash('md5').update(password).digest('hex')
         this.save()
       }
     }

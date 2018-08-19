@@ -42,9 +42,9 @@
                     <button class="button" @click="find">搜索</button>
                   </p>
                 </div>
-<!--                <div class="level-item">
-                  <button class="button is-info" @click="search">高级搜索</button>
-                </div>-->
+                <!--                <div class="level-item">
+                                  <button class="button is-info" @click="search">高级搜索</button>
+                                </div>-->
               </template>
             </table-toolbar>
 
@@ -118,7 +118,7 @@
                   </b-autocomplete>
                 </div>
 
-                <div class="select is-expanded" >
+                <div class="select is-expanded">
                   <b-autocomplete
                     :value="portName(current.routeLinePortDischargeId)"
                     @input="value => input = value"
@@ -180,7 +180,16 @@
               </div>
               <div class="control">
                 <p class="control is-fullwidth">
-                  <input class="input" placeholder="船期" v-model="current.schedule">
+                  <!--<input class="input" placeholder="船期" v-model="current.schedule">-->
+                  <checkbox-group v-model="scheduleArray">
+                    <checkbox val="MON" :checked="scheduleArray.includes('MON')">MON</checkbox>
+                    <checkbox val="TUE" :checked="scheduleArray.includes('TUE')">TUE</checkbox>
+                    <checkbox val="WED" :checked="scheduleArray.includes('WED')">WED</checkbox>
+                    <checkbox val="THU" :checked="scheduleArray.includes('THU')">THU</checkbox>
+                    <checkbox val="FRI" :checked="scheduleArray.includes('FRI')">FRI</checkbox>
+                    <checkbox val="SAT" :checked="scheduleArray.includes('SAT')">SAT</checkbox>
+                    <checkbox val="SUN" :checked="scheduleArray.includes('SUN')">SUN</checkbox>
+                  </checkbox-group>
                 </p>
               </div>
             </div>
@@ -237,11 +246,10 @@
     },
     methods: {
       portName(item = this.current.portId) {
-        // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)
         return find ? find.nameCn : ''
       },
-      carrierName(item = this.current.waiPeiCompanyId){
+      carrierName(item = this.current.waiPeiCompanyId) {
         const find = this.carrier.find(it => it.carrierId == item)
         return find ? find.nameCn : ''
       },
@@ -265,8 +273,18 @@
       port() {
         return this.$store.state.app.db.port.map(it => it.data())
       },
-      carrier(){
+      carrier() {
         return this.$store.state.app.db.carrier.map(it => it.data())
+      },
+      scheduleArray: {
+        get() {
+          const val = this.current.schedule ? this.current.schedule.split('/') : [];
+          // console.log(this.current.schedule, val)
+          return val
+        },
+        set(val) {
+          this.current.schedule = (val.join('/'))
+        }
       }
     }
 

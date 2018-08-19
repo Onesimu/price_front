@@ -59,8 +59,9 @@
                 <label class="label">生效日期</label>
               </div>
               <div class="control">
-                <p class="control" has-addons>
-                  <input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">
+                <p class="control has-addons">
+                  <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
+                  <datepicker placeholder="生效日期" :options="localeOption" v-model="current.fromDate"></datepicker>
                 </p>
               </div>
             </div>
@@ -180,6 +181,7 @@
 <script>
   import crud from "./crud"
   import {getDate} from "../utils/constants";
+  import zh from '../utils/zh'
 
   export default {
 
@@ -187,7 +189,10 @@
       return {
         // country:[],
         selected: {},
-        input: ''
+        input: '',
+        localeOption: {
+          locale: zh,
+        },
       }
     },
     mixins: [crud],

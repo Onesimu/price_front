@@ -200,7 +200,8 @@
               </div>
               <div class="control is-grouped">
                 <p class="control is-expanded">
-                  <input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">
+                  <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
+                  <datepicker placeholder="生效日期" v-model="current.fromDate"></datepicker>
                 </p>
                 <p class="control is-expanded">
                   <input class="input" placeholder="运输模式" v-model="current.transMode">

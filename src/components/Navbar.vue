@@ -14,42 +14,16 @@
             </div>
           </a>
         </div>
-        <div class="nav-right is-flex" v-if="device.isMobile">
-          <router-link class="nav-item" to="/login">
-            <span class="icon is-small">
-              <i class="fa fa-television"></i>
-            </span>
-          </router-link>
-          <router-link class="nav-item" to="/manual">
-            <span class="icon is-small">
-              <i class="fa fa-book"></i>
-            </span>
-          </router-link>
-          <span class="nav-item tour-drop-down" 
-            @mouseenter="showLangs = true" 
-            @mouseleave="showLangs = false">
-            <a class="icon  is-small">
-              <i class="fa fa-language"></i>
-            </a>
-            <ul class="tour-drop-down-list" v-show="showLangs">
-              <li v-for="(text, lang) in langs" class="hvr-shadow-radial">
-                 <a href="javascript:void(0);"
-                   :class="{ 'is-active': $i18n.locale === lang }"
-                   @click="setLang(lang)">{{text}}</a>
-              </li>
-            </ul>
-          </span>
-        </div>
-        <div class="nav-right is-flex" v-else>
-          <router-link class="nav-item hvr-underline-from-center" to="/home">
+        <div class="nav-right is-flex">
+          <a class="nav-item hvr-underline-from-center" href="./home.html">
             {{$t('header.nav[0]')}}
-          </router-link>
+          </a>
           <router-link class="nav-item hvr-underline-from-center" to="/manual">
-            {{$t('header.nav[1]')}}
+            {{$t('header.nav[2]')}}
           </router-link>
-					<router-link class="nav-item hvr-underline-from-center" to="/login">
-						{{$t('header.nav[2]')}}
-					</router-link>
+					<a class="nav-item hvr-underline-from-center" href="./about.html">
+						{{$t('header.nav[3]')}}
+					</a>
         </div>
       </nav>
     </div>
@@ -91,22 +65,28 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~bulma/sass/utilities/variables';
 @import '~bulma/sass/utilities/mixins';
 @import '~hover.css/scss/hover.scss';
-$primary: #772b90;
+$primary: white;
+$main_color : #2b4079;
 
 .app-navbar {
   position: fixed;
   min-width: 100%;
   z-index: 1024;
-  background-color: white;
+  background-color: $main_color;
 
   .nav {
     margin: 0 auto;
     max-width: 90rem;
     height: 5rem;
+    color:white;
+
+    .nav-item a, a.nav-item {
+      color: white;
+    }
 
     @include mobile() {
       height: 2rem;
@@ -152,7 +132,7 @@ $primary: #772b90;
     top: 80%;
     right: 0.75rem;
     max-width: 7rem;
-    background-color: white;
+    background-color: $main_color;
     padding: 0.75rem 0;
     border: 1px solid #ddd;
     border-bottom-color: #ccc;

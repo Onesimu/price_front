@@ -1,11 +1,10 @@
 <template>
-  <footer class="footer">
+  <footer class="footer main_footer">
     <div class="container">
       <div class="content has-text-centered">
         <p class="social">
-          <a href="#">
-            联系我们
-          </a>
+          Copyright@2012-2018<br>
+          河北信息技术有限公司<br>
         </p>
       </div>
     </div>
@@ -19,12 +18,16 @@ export default {
 
 <style lang="scss">
 
-.footer {  
-  background-color: white;
+.main_footer {
+  background-color: #333333;
   padding: 1.5rem;
+  .content{
+    color: #999999;
 
-  .social a {
-    margin-right: 0.75rem;
+    .social a {
+      margin-right: 0.75rem;
+    }
   }
+
 }
 </style>

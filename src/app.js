@@ -24,8 +24,8 @@ Vue.prototype.$http = http;
 
 // const spring = require('spring-data-rest-js');
 import spring from 'spring-data-rest-js'
-spring.requestConfig.baseURL = 'http://localhost:8080//rest//';
-spring.entityConfig.restBaseURL = 'http://localhost:8080//rest//';
+spring.requestConfig.baseURL = '//';
+spring.entityConfig.restBaseURL = '//rest//';
 // spring.requestConfig.globalFetchOptions.credentials = 'omit'
 
 spring.Carrier = spring.extend('carriers');

@@ -83,6 +83,12 @@ export default {
       })
     },
     save() {
+      this.current.updateTime = new Date()
+      this.current.updateStaffid = this.$db.user.staffName
+      if(!this.current.id){
+        this.current.createTime = new Date()
+        this.current.createStaffid = this.$db.user.staffName
+      }
       const entity = new this.entityClass(this.current)
       // find.patchData(this.current)
       // find.save()

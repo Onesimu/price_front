@@ -42,7 +42,7 @@ function generateRoutes (items) {
 }
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   linkActiveClass: 'is-active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [

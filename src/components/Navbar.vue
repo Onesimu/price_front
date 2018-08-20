@@ -3,25 +3,28 @@
     <div class="hero-head">
       <nav class="nav">
         <div class="nav-left">
-          <a class="nav-item hero-brand is-hidden-tablet" href="/#/home">
+<!--          <a class="nav-item hero-brand is-hidden-tablet" href="/#/home">
             <img src="~assets/logo.png">
             Vue Bulma
-          </a>
-          <a class="nav-item hero-brand is-hidden-mobile" href="/#/home">
-            <img class="tour-logo" src="~assets/logo.png">
+          </a>-->
+<!--          <a class="nav-item hero-brand is-hidden-mobile" href="/#/home">
+            &lt;!&ndash;<img class="tour-logo" src="~assets/logo.png">&ndash;&gt;
             <div class="tour-title">
               <span class="vue">运费</span><span class="bulma">系统</span>
             </div>
-          </a>
+          </a>-->
         </div>
         <div class="nav-right is-flex">
-          <a class="nav-item hvr-underline-from-center" href="./home.html">
+          <a class="nav-item hvr-underline-from-center" href="/home.html">
             {{$t('header.nav[0]')}}
           </a>
-          <router-link class="nav-item hvr-underline-from-center" to="/manual">
+          <a class="nav-item hvr-underline-from-center" href="/home.html" v-if="$db.user">
+            退出
+          </a>
+          <router-link class="nav-item hvr-underline-from-center" to="/manual" v-else>
             {{$t('header.nav[2]')}}
           </router-link>
-					<a class="nav-item hvr-underline-from-center" href="./about.html">
+					<a class="nav-item hvr-underline-from-center" href="/about.html">
 						{{$t('header.nav[3]')}}
 					</a>
         </div>
@@ -60,6 +63,10 @@ export default {
       console.log(this.$i18n)
       this.$i18n.locale = lang
       this.toggleLang(lang)
+    },
+    logout(){
+      this.$db.user = {}
+      this.$router.push('/home.html')
     }
   }
 }

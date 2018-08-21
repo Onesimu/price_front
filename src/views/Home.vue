@@ -4,11 +4,13 @@
       <div class="container has-text-centered">
         <div class="column is-6 is-offset-3">
           <div class="center-text">
+
+            <h4 class="title">出口运价</h4>
                 <div class="box">
                   <ul>
                     <li>
                       <span ><a class="button is-info is-large">整箱</a></span>
-                      <span ><a class="button is-primary is-large">拼箱</a></span>
+                      <span ><a class="button is-large">拼箱</a></span>
                     </li>
                   </ul>
                 </div>
@@ -50,11 +52,11 @@
                 </p>
               </div>
 
-              <router-link class="button is-primary is-large is-fullwidth"
+              <router-link class="button is-info is-large is-fullwidth"
                            :to="{ path:'info', query: { routeLinePortLoadId: current.routeLinePortLoadId,
                            routeLinePortDischargeId:current.routeLinePortDischargeId }}">
                 <span class="icon is-medium">
-                  <i class="far fa-bell"></i>
+                  <i class="fa fa-search"></i>
                 </span>
                 <span>搜索</span>
               </router-link>
@@ -65,6 +67,11 @@
         </div>
       </div>
     </div>
+
+      <figure class="image">
+        <img src="../assets/banner.jpg">
+      </figure>
+
   </section>
 </template>
 
@@ -222,4 +229,12 @@ div.is-parent {
   color: #00d1b2;
 }
 
+  section.hero{
+    background-color: #f5f5f5;
+    /*background-image: url('../assets/banner_main.JPG');*/
+  }
+
+  a.button:visited{
+    color: $primary;
+  }
 </style>

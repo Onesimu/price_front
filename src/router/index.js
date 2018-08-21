@@ -52,6 +52,11 @@ export default new Router({
       component: loadView('Table')
     },
     {
+      name: 'Home-zh-CN',
+      path: '/info',
+      component: loadView('Home')
+    },
+    {
       name: 'Login-zh-CN',
       path: '/login',
       component: loadView('Login')

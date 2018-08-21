@@ -1,45 +1,79 @@
 <template>
-  <div class="tile is-parent is-vertical">
-    <article class="tile is-child has-text-centered home-brief">
-      <h3 class="title is-2">
-        <strong>{{$t('home.brief[0]')}}</strong>{{$t('home.brief[1]')}}
-      </h3>
-      <p><img width="200" src="~assets/logo.png"></p>
-      <p>{{$t('home.brief[2]')}}</p>
-      <p class="subtitle is-4">
-        <a class="vuejs" href="https://vuejs.org">Vuejs</a> & <a class="bulma" href="http://bulma.io">Bulma</a>
-      </p>
-      <p>{{$t('home.brief[3]')}}</p>
-      <div class="column has-text-centered">
-        <span class="icon is-large" style="margin-right: -15px;">
-          <i class="fa fa-mobile"></i>
-        </span>
-        <span class="icon is-large">
-          <i class="fa fa-tablet"></i>
-        </span>
-        <span class="icon is-large" style="margin-right: 10px;">
-          <i class="fa fa-desktop"></i>
-        </span>
-        <p class="title is-4"><strong>{{$t('home.brief[4]')}}</strong></p>
-        <p class="subtitle">{{$t('home.brief[5]')}}</p>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+          <div class="center-text">
+                <div class="box">
+                  <ul>
+                    <li>
+                      <span ><a class="button is-info is-large">整箱</a></span>
+                      <span ><a class="button is-primary is-large">拼箱</a></span>
+                    </li>
+                  </ul>
+                </div>
+
+            <form>
+
+              <div class="field">
+                <p class="control is-fullwidth is-large has-addons-right">
+
+                  <b-autocomplete
+                    :size="'is-large'"
+                    :expanded="true"
+                    placeholder="起始港"
+                    :open-on-focus="true"
+                    >
+                  </b-autocomplete>
+                  <!--<b-autocomplete
+                    :value="portName(current.routeLinePortLoadId)"
+                    @input="value => input = value"
+                    placeholder="起始港"
+                    :data="filteredDataObj"
+                    field="nameCn"
+                    :open-on-focus="true"
+                    @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
+                  </b-autocomplete>-->
+                </p>
+
+              </div>
+
+              <div class="field">
+                <p class="control is-fullwidth is-large has-addons-right">
+
+                  <b-autocomplete
+                    :size="'is-large'"
+                    :expanded="true"
+                    placeholder="目的港"
+                    :open-on-focus="true"
+                  >
+                  </b-autocomplete>
+                  <!--<b-autocomplete
+                    :value="portName(current.routeLinePortLoadId)"
+                    @input="value => input = value"
+                    placeholder="起始港"
+                    :data="filteredDataObj"
+                    field="nameCn"
+                    :open-on-focus="true"
+                    @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
+                  </b-autocomplete>-->
+                </p>
+              </div>
+
+              <a class="button is-primary is-large is-fullwidth" href="./index.html" target="_blank">
+                <span class="icon is-medium">
+                  <i class="far fa-bell"></i>
+                </span>
+                <span>搜索</span>
+              </a>
+              <br>
+            </form>
+
+          </div>
+        </div>
       </div>
-      <p class="hero-buttons">
-        <a class="button is-large hvr-buzz">
-          <span class="icon">
-            <i class="fa fa-television"></i>
-          </span>
-          <span>{{$t('home.brief[6]')}}</span>
-        </a>
-        <a class="button is-large hvr-buzz">
-          <span class="icon">
-            <i class="fa fa-book"></i>
-          </span>
-          <span>{{$t('home.brief[7]')}}</span>
-        </a>
-      </p>
-    </article>
-    <hr>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>

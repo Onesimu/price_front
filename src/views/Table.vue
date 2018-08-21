@@ -200,6 +200,16 @@
       this.entityClass = this.$spring.Seaexpressprice
       this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
     },
+    mounted(){
+      const query = this.$route.query;
+      // console.log(query)
+      if(query.routeLinePortDischargeId && query.routeLinePortDischargeId){
+        this.current = query
+        this.search()
+      } else {
+        this.getData()
+      }
+    },
     methods: {
       portName(item = this.current.portId) {
         // console.log(this.port,this.current)

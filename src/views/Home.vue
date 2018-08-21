@@ -19,13 +19,8 @@
                 <p class="control is-fullwidth is-large has-addons-right">
 
                   <b-autocomplete
-                    :size="'is-large'"
+                   :size="'is-large'"
                     :expanded="true"
-                    placeholder="起始港"
-                    :open-on-focus="true"
-                    >
-                  </b-autocomplete>
-                  <!--<b-autocomplete
                     :value="portName(current.routeLinePortLoadId)"
                     @input="value => input = value"
                     placeholder="起始港"
@@ -33,7 +28,7 @@
                     field="nameCn"
                     :open-on-focus="true"
                     @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
-                  </b-autocomplete>-->
+                  </b-autocomplete>
                 </p>
 
               </div>
@@ -44,28 +39,25 @@
                   <b-autocomplete
                     :size="'is-large'"
                     :expanded="true"
-                    placeholder="目的港"
-                    :open-on-focus="true"
-                  >
-                  </b-autocomplete>
-                  <!--<b-autocomplete
-                    :value="portName(current.routeLinePortLoadId)"
+                    :value="portName(current.routeLinePortDischargeId)"
                     @input="value => input = value"
-                    placeholder="起始港"
+                    placeholder="目的港"
                     :data="filteredDataObj"
                     field="nameCn"
                     :open-on-focus="true"
-                    @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
-                  </b-autocomplete>-->
+                    @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
+                  </b-autocomplete>
                 </p>
               </div>
 
-              <a class="button is-primary is-large is-fullwidth" href="./index.html" target="_blank">
+              <router-link class="button is-primary is-large is-fullwidth"
+                           :to="{ path:'home', query: { routeLinePortLoadId: current.routeLinePortLoadId,
+                           routeLinePortDischargeId:current.routeLinePortDischargeId }}">
                 <span class="icon is-medium">
                   <i class="far fa-bell"></i>
                 </span>
                 <span>搜索</span>
-              </a>
+              </router-link>
               <br>
             </form>
 
@@ -77,8 +69,114 @@
 </template>
 
 <script>
-export default {
-}
+  import crud from "./crud"
+  import {getDate} from "../utils/constants";
+  import zh from '../utils/zh'
+
+  export default {
+
+    data() {
+      return {
+        // country:[],
+        selected: {},
+        input: '',
+        localeOption: {
+          locale: zh,
+        },
+      }
+    },
+    mixins: [crud],
+    created() {
+      this.entityClass = this.$spring.Seaexpressprice
+      this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
+    },
+    methods: {
+      portName(item = this.current.portId) {
+        // console.log(this.port,this.current)
+        const find = this.port.find(it => it.portId == item)
+        return find ? find.nameCn : ''
+      },
+      carrierName(item = this.current.waiPeiCompanyId){
+        const find = this.carrier.find(it => it.carrierId == item)
+        return find ? find.nameCn : ''
+      },
+      getDate: getDate,
+      find() {
+        const word = this.word;
+        const filter = this.data.map(it => it.data()).filter(
+          it => [this.portName(it.routeLinePortLoadId),this.portName(it.routeLinePortDischargeId),this.carrierName(it.carrierId)]
+            .join().includes(word))
+        if (filter.length == 0) {
+          this.$notify.warning({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      },
+      localSearch(){
+        const search = this.current
+        const predict = it =>
+          search.routeLinePortLoadId === it.routeLinePortLoadId &&
+          search.routeLinePortDischargeId === it.routeLinePortDischargeId
+        const filter = this.data.map(it => it.data()).filter(predict)
+        if (filter.length == 0) {
+          this.$notify.info({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      },
+      async search() {
+        const search = this.current
+        const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
+
+        let predict = it => true
+        if(search.waiPeiCompanyId){
+          predict = it =>
+            search.waiPeiCompanyId === it.waiPeiCompanyId
+        }
+        if(search.fromDate){
+          predict = it =>
+            search.waiPeiCompanyId === it.waiPeiCompanyId &&
+            it.fromDate.startsWith(search.fromDate)
+        }
+
+        const filter = json.map(it => it.data()).filter(predict)
+        if (filter.length == 0) {
+          this.$notify.info({
+            content: '未查到结果'
+          })
+          return
+        }
+        this.viewData = filter
+      }
+    },
+    computed: {
+      filteredDataObj() {
+        return this.port.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input)
+        })
+      },
+      filteredData() {
+        return this.carrier.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input)
+        })
+      },
+      port() {
+        return this.$store.state.app.db.port.map(it => it.data())
+      },
+      carrier(){
+        return this.$store.state.app.db.carrier.map(it => it.data())
+      }
+    }
+
+  }
 </script>
 
 <style lang="scss" scoped>

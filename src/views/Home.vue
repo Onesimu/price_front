@@ -22,9 +22,9 @@
                    :size="'is-large'"
                     :expanded="true"
                     :value="portName(current.routeLinePortLoadId)"
-                    @input="value => input = value"
+                    @input="value => input1 = value"
                     placeholder="起始港"
-                    :data="filteredDataObj"
+                    :data="filteredDataObj1"
                     field="nameCn"
                     :open-on-focus="true"
                     @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
@@ -40,9 +40,9 @@
                     :size="'is-large'"
                     :expanded="true"
                     :value="portName(current.routeLinePortDischargeId)"
-                    @input="value => input = value"
+                    @input="value => input2 = value"
                     placeholder="目的港"
-                    :data="filteredDataObj"
+                    :data="filteredDataObj2"
                     field="nameCn"
                     :open-on-focus="true"
                     @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
@@ -79,7 +79,8 @@
       return {
         // country:[],
         selected: {},
-        input: '',
+        input1: '',
+        input2: '',
         localeOption: {
           locale: zh,
         },
@@ -154,11 +155,18 @@
       }
     },
     computed: {
-      filteredDataObj() {
+      filteredDataObj1() {
         return this.port.filter((option) => {
           return option.nameCn
             .toString()
-            .includes(this.input)
+            .includes(this.input1)
+        })
+      },
+      filteredDataObj2() {
+        return this.port.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input2)
         })
       },
       filteredData() {

@@ -72,7 +72,6 @@
           </div>
 
           <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id"
-                      :on-select-change="onSelectChange"
                       :change="onTableChange">
             <table-toolbar has-refresh has-columns-control>
               <template slot="left">
@@ -124,52 +123,6 @@
             </column>
           </data-table>
 
-          <modal title="编辑" :width="820" :is-show="isShow" transition="fadeDown" @close="isShow=false"
-                 ok-text="确定" cancel-text="取消" :backdrop-closable="false" :on-ok="save">
-
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">运价</label>
-              </div>
-              <div class="control is-grouped">
-                <p class="control is-expanded">
-                  <input class="input" type="number" placeholder="20GP" v-model="current.publicPrice_20Gp">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" type="number" placeholder="40GP" v-model="current.publicPrice_40Gp">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" type="number" placeholder="40HQ" v-model="current.publicPrice_40Hq">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" type="number" placeholder="45HQ" v-model="current.publicPrice_45Hq">
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" type="number" placeholder="40RD" v-model="current.publicPrice_40Rd">
-                </p>
-              </div>
-            </div>
-
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">船期</label>
-              </div>
-              <div class="control">
-                <p class="control is-fullwidth">
-                  <input class="input" placeholder="船期" v-model="current.schedule">
-                </p>
-              </div>
-            </div>
-
-            <div class="control is-horizontal">
-              <div class="control-label">
-                <label class="label">备注</label>
-              </div>
-              <div class="control">
-                <textarea class="textarea" placeholder="添加备注信息" v-model="current.remark"></textarea>
-              </div>
-            </div>
-          </modal>
 
         </article>
       </div>
@@ -193,9 +146,20 @@
         localeOption: {
           locale: zh,
         },
+        viewData: [],
+        data: [],
+        hasSelect: false,
+        isShow: false,
+        selectedItems: [],
+        current: {},
+        pagination: {
+          total: 0
+        },
+        word: '',
+        entityClass: {}
       }
     },
-    mixins: [crud],
+    // mixins: [crud],
     created() {
       this.entityClass = this.$spring.Seaexpressprice
       this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
@@ -211,6 +175,24 @@
       }
     },
     methods: {
+      async getData() {
+        const size = this.pagination.total || 0
+        await this.entityClass.findAll({size: size}).then(
+          json => {
+            this.data = json
+            this.pagination.total = json.page.totalElements
+            const map = json.map(it => {
+              it.data().id = it.id
+              return it.data()
+            })
+            this.viewData = map
+          }
+        )
+      },
+      onTableChange(params) {
+        // console.log(params)
+        this.getData()
+      },
       portName(item = this.current.portId) {
         // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)

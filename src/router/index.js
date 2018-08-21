@@ -49,12 +49,12 @@ export default new Router({
     {
       name: 'Home-zh-CN',
       path: '/home',
-      component: loadView('Table')
+      component: loadView('Home')
     },
     {
       name: 'Home-zh-CN',
       path: '/info',
-      component: loadView('Home')
+      component: loadView('Table')
     },
     {
       name: 'Login-zh-CN',

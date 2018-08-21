@@ -51,7 +51,7 @@
               </div>
 
               <router-link class="button is-primary is-large is-fullwidth"
-                           :to="{ path:'home', query: { routeLinePortLoadId: current.routeLinePortLoadId,
+                           :to="{ path:'info', query: { routeLinePortLoadId: current.routeLinePortLoadId,
                            routeLinePortDischargeId:current.routeLinePortDischargeId }}">
                 <span class="icon is-medium">
                   <i class="far fa-bell"></i>

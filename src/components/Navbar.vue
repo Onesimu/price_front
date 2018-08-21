@@ -15,9 +15,9 @@
           </a>-->
         </div>
         <div class="nav-right is-flex">
-          <a class="nav-item hvr-underline-from-center" href="/home.html">
+          <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
-          </a>
+          </router-link>
           <a class="nav-item hvr-underline-from-center" href="/home.html" v-if="$db.user">
             退出
           </a>

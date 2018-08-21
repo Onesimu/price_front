@@ -13,9 +13,9 @@
               <div class="select is-expanded">
                 <b-autocomplete
                   :value="portName(current.routeLinePortLoadId)"
-                  @input="value => input = value"
+                  @input="value => input1 = value"
                   placeholder="起始港"
-                  :data="filteredDataObj"
+                  :data="filteredDataObj1"
                   field="nameCn"
                   :open-on-focus="true"
                   @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
@@ -25,9 +25,9 @@
               <div class="select is-expanded" >
                 <b-autocomplete
                   :value="portName(current.routeLinePortDischargeId)"
-                  @input="value => input = value"
+                  @input="value => input2 = value"
                   placeholder="目的港"
-                  :data="filteredDataObj"
+                  :data="filteredDataObj2"
                   field="nameCn"
                   :open-on-focus="true"
                   @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
@@ -43,7 +43,7 @@
               <div class="select">
                 <b-autocomplete
                   :value="carrierName(current.waiPeiCompanyId)"
-                  @input="value => input = value"
+                  @input="value => input3 = value"
                   placeholder="承运公司"
                   :data="filteredData"
                   field="nameCn"
@@ -142,7 +142,9 @@
       return {
         // country:[],
         selected: {},
-        input: '',
+        input1: '',
+        input2:'',
+        input3:'',
         localeOption: {
           locale: zh,
         },
@@ -256,18 +258,25 @@
       }
     },
     computed: {
-      filteredDataObj() {
-        return this.port.filter((option) => {
-          return option.nameCn
-            .toString()
-            .includes(this.input)
-        })
-      },
       filteredData() {
         return this.carrier.filter((option) => {
           return option.nameCn
             .toString()
-            .includes(this.input)
+            .includes(this.input3)
+        })
+      },
+      filteredDataObj1() {
+        return this.port.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input1)
+        })
+      },
+      filteredDataObj2() {
+        return this.port.filter((option) => {
+          return option.nameCn
+            .toString()
+            .includes(this.input2)
         })
       },
       port() {

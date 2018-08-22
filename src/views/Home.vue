@@ -19,11 +19,11 @@
 
               <div class="field">
                 <p class="control is-fullwidth is-large has-addons-right">
-
+                  <!--:value="portName(current.routeLinePortLoadId)"-->
                   <b-autocomplete
                    :size="'is-large'"
                     :expanded="true"
-                    :value="portName(current.routeLinePortLoadId)"
+
                     @input="value => input1 = value"
                     placeholder="起始港"
                     :data="filteredDataObj1"

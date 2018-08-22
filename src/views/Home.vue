@@ -78,6 +78,7 @@
   import crud from "./crud"
   import {getDate} from "../utils/constants";
   import zh from '../utils/zh'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
 
@@ -185,15 +186,11 @@
             .includes(this.input)
         })
       },
-      port() {
-        return this.$store.state.app.db.port.map(it => it.data())
-      },
-      carrier(){
-        return this.$store.state.app.db.carrier.map(it => it.data())
-      },
-      country(){
-        return this.$store.state.app.db.country.map(it => it.data())
-      }
+      ...mapGetters({
+        port: 'port',
+        carrier: 'carrier',
+        country: 'country'
+      })
     }
 
   }

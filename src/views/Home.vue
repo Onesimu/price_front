@@ -101,7 +101,7 @@
     methods: {
       portName(item = this.current.portId) {
         const find = this.port.find(it => it.portId == item)
-        return find ? find.nameCn + `(${this.countryName(find.countryId)})` : ''
+        return find ? find.nameCn : ''
       },
       carrierName(item = this.current.waiPeiCompanyId){
         const find = this.carrier.find(it => it.carrierId == item)
@@ -139,7 +139,7 @@
         }
         this.viewData = filter
       },
-      async search() {
+      async searchNormal() {
         const search = this.current
         const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
 
@@ -162,6 +162,12 @@
           return
         }
         this.viewData = filter
+        return json
+      },
+      search(){
+        this.searchNormal().catch(error => {
+          console.log(error)
+          this.$notify.danger({content: '查询失败,请重新查询'})})
       }
     },
     computed: {

@@ -240,14 +240,14 @@
         }
         this.viewData = filter
       },
-      async search() {
+      async searchNormal() {
         const search = this.current
         const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
 
         let predict = it => true
         if(search.waiPeiCompanyId){
-           predict = it =>
-           search.waiPeiCompanyId === it.waiPeiCompanyId
+          predict = it =>
+            search.waiPeiCompanyId === it.waiPeiCompanyId
         }
         if(search.fromDate){
           predict = it =>
@@ -263,6 +263,11 @@
           return
         }
         this.viewData = filter
+      },
+      search(){
+        this.searchNormal().catch(error => {
+          console.log(error)
+          this.$notify.danger({content: '查询失败,请重新查询'})})
       }
     },
     computed: {

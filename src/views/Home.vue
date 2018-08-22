@@ -197,6 +197,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../../node_modules/buefy/src/scss/components/_autocomplete.scss';
+  /*@import '../../node_modules/buefy/src/scss/components/_dropdown.scss';*/
 @import '~bulma/sass/utilities/variables';
 @import '~hover.css/scss/hover.scss';
 $primary: #772b90;

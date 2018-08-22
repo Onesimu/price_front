@@ -8,13 +8,14 @@ import store from './store'
 import { TOGGLE_PAGE, TOGGLE_SIDEBAR } from 'vuex-store/mutation-types'
 import locales from 'i18n/locales'
 
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
+// Vue.use(Buefy)
+Vue.component(Buefy.Autocomplete.name, Buefy.Autocomplete)
+
 import VueBlu from 'vue-blu'
 import 'vue-blu/dist/css/vue-blu.min.css'
 Vue.use(VueBlu)
-
-import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
-Vue.use(Buefy)
 
 import Promise from 'es6-promise'
 Promise.polyfill()

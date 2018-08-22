@@ -87,7 +87,12 @@
             </table-toolbar>
 
             <!--<column label="报价编号" field="sePriceId"></column>-->
-            <column label="起始港" field="routeLinePortLoadId">
+
+            <column label="起始港" field="routeLinePortLoadNameCn"></column>
+            <column label="目的港" field="routeLinePortDischargeNameCn"></column>
+            <column label="中转港" field="transPortNameCn"></column>
+
+     <!--       <column label="起始港" field="routeLinePortLoadId">
               <template slot-scope="row">
                 <span>{{ portName(row.routeLinePortLoadId) }}</span>
               </template>
@@ -101,18 +106,20 @@
               <template slot-scope="row">
                 <span>{{ portName(row.transPortId) }}</span>
               </template>
-            </column>
+            </column>-->
+
             <!--<column label="生效日期" field="fromDate"></column>-->
             <column label="20GP" field="publicPrice_20Gp" sorter="custom"></column>
             <column label="40GP" field="publicPrice_40Gp" sorter="custom"></column>
             <column label="40HQ" field="publicPrice_40Hq" sorter="custom"></column>
             <column label="45HQ" field="publicPrice_45Hq" sorter="custom"></column>
             <column label="40RD" field="publicPrice_40Rd" sorter="custom"></column>
-            <column label="公司" field="waiPeiCompanyId">
+     <!--       <column label="公司" field="waiPeiCompanyId">
               <template slot-scope="row">
                 <span>{{ carrierName(row.waiPeiCompanyId) }}</span>
               </template>
-            </column>
+            </column>-->
+            <column label="公司" field="waiPeiCompanyNameCn"></column>
             <column label="船期" field="schedule"></column>
             <column label="运输模式" field="transMode"></column>
             <column label="生效日期" field="fromDate" sorter="custom">
@@ -164,7 +171,7 @@
     },
     // mixins: [crud],
     created() {
-      this.entityClass = this.$spring.Seaexpressprice
+      this.entityClass = this.$spring.SeaexpresspriceView
       this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
     },
     mounted(){

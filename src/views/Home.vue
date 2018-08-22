@@ -19,11 +19,10 @@
 
               <div class="field">
                 <p class="control is-fullwidth is-large has-addons-right">
-                  <!--:value="portName(current.routeLinePortLoadId)"-->
                   <b-autocomplete
                    :size="'is-large'"
                     :expanded="true"
-
+                    :value="portName(current.routeLinePortLoadId)"
                     @input="value => input1 = value"
                     placeholder="起始港"
                     :data="filteredDataObj1"
@@ -100,12 +99,15 @@
     },
     methods: {
       portName(item = this.current.portId) {
-        // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)
-        return find ? find.nameCn : ''
+        return find ? find.nameCn + `(${this.countryName(find.countryId)})` : ''
       },
       carrierName(item = this.current.waiPeiCompanyId){
         const find = this.carrier.find(it => it.carrierId == item)
+        return find ? find.nameCn : ''
+      },
+      countryName(item = this.current.countryId){
+        const find = this.country.find(it => it.countryId == item)
         return find ? find.nameCn : ''
       },
       getDate: getDate,
@@ -188,6 +190,9 @@
       },
       carrier(){
         return this.$store.state.app.db.carrier.map(it => it.data())
+      },
+      country(){
+        return this.$store.state.app.db.country.map(it => it.data())
       }
     }
 

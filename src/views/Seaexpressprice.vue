@@ -100,7 +100,7 @@
                     @input="value => input1 = value"
                     placeholder="起始港"
                     :data="filteredDataObj1"
-                    field="nameCn"
+                    field="nameEn"
                     :open-on-focus="true"
                     @select="option => current.routeLinePortLoadId = option.portId">
                   </b-autocomplete>
@@ -112,7 +112,7 @@
                     @input="value => input1 = value"
                     placeholder="中转港"
                     :data="filteredDataObj1"
-                    field="nameCn"
+                    field="nameEn"
                     :open-on-focus="true"
                     @select="option => current.transPortId = option.portId">
                   </b-autocomplete>
@@ -124,7 +124,7 @@
                     @input="value => input2 = value"
                     placeholder="目的港"
                     :data="filteredDataObj2"
-                    field="nameCn"
+                    field="nameEn"
                     :open-on-focus="true"
                     @select="option => current.routeLinePortDischargeId = option.portId">
                   </b-autocomplete>
@@ -143,7 +143,7 @@
                     @input="value => input3 = value"
                     placeholder="承运公司"
                     :data="filteredData"
-                    field="nameCn"
+                    field="nameEn"
                     :open-on-focus="true"
                     @select="option => current.waiPeiCompanyId = option.carrierId">
                   </b-autocomplete>
@@ -250,11 +250,11 @@
     methods: {
       portName(item = this.current.portId) {
         const find = this.port.find(it => it.portId == item)
-        return find ? find.nameCn : ''
+        return find ? find.nameEn : ''
       },
       carrierName(item = this.current.waiPeiCompanyId) {
         const find = this.carrier.find(it => it.carrierId == item)
-        return find ? find.nameCn : ''
+        return find ? find.nameEn : ''
       },
       getDate: getDate,
       find() {
@@ -274,21 +274,21 @@
     computed: {
       filteredData() {
         return this.carrier.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input3)
         })
       },
       filteredDataObj1() {
         return this.port.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input1)
         })
       },
       filteredDataObj2() {
         return this.port.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input2)
         })

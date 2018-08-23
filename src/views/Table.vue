@@ -16,7 +16,7 @@
                   @input="value => input1 = value"
                   placeholder="起始港"
                   :data="filteredDataObj1"
-                  field="nameCn"
+                  field="nameEn"
                   :open-on-focus="true"
                   @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
                 </b-autocomplete>
@@ -28,7 +28,7 @@
                   @input="value => input2 = value"
                   placeholder="目的港"
                   :data="filteredDataObj2"
-                  field="nameCn"
+                  field="nameEn"
                   :open-on-focus="true"
                   @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
                 </b-autocomplete>
@@ -46,7 +46,7 @@
                   @input="value => input3 = value"
                   placeholder="承运公司"
                   :data="filteredData"
-                  field="nameCn"
+                  field="nameEn"
                   :open-on-focus="true"
                   @select="option => current.waiPeiCompanyId = option && option.carrierId">
                 </b-autocomplete>
@@ -88,11 +88,11 @@
 
             <!--<column label="报价编号" field="sePriceId"></column>-->
 
-            <column label="起始港" field="routeLinePortLoadNameCn"></column>
+  <!--          <column label="起始港" field="routeLinePortLoadNameCn"></column>
             <column label="目的港" field="routeLinePortDischargeNameCn"></column>
-            <column label="中转港" field="transPortNameCn"></column>
+            <column label="中转港" field="transPortNameCn"></column>-->
 
-     <!--       <column label="起始港" field="routeLinePortLoadId">
+            <column label="起始港" field="routeLinePortLoadId">
               <template slot-scope="row">
                 <span>{{ portName(row.routeLinePortLoadId) }}</span>
               </template>
@@ -106,7 +106,7 @@
               <template slot-scope="row">
                 <span>{{ portName(row.transPortId) }}</span>
               </template>
-            </column>-->
+            </column>
 
             <!--<column label="生效日期" field="fromDate"></column>-->
             <column label="20GP" field="publicPrice_20Gp" sorter="custom"></column>
@@ -114,12 +114,12 @@
             <column label="40HQ" field="publicPrice_40Hq" sorter="custom"></column>
             <column label="45HQ" field="publicPrice_45Hq" sorter="custom"></column>
             <column label="40RD" field="publicPrice_40Rd" sorter="custom"></column>
-     <!--       <column label="公司" field="waiPeiCompanyId">
+            <column label="公司" field="waiPeiCompanyId">
               <template slot-scope="row">
                 <span>{{ carrierName(row.waiPeiCompanyId) }}</span>
               </template>
-            </column>-->
-            <column label="公司" field="waiPeiCompanyNameCn"></column>
+            </column>
+            <!--<column label="公司" field="waiPeiCompanyNameCn"></column>-->
             <column label="船期" field="schedule"></column>
             <column label="运输模式" field="transMode"></column>
             <column label="生效日期" field="fromDate" sorter="custom">
@@ -206,11 +206,11 @@
       portName(item = this.current.portId) {
         // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)
-        return find ? find.nameCn : ''
+        return find ? find.nameEn : ''
       },
       carrierName(item = this.current.waiPeiCompanyId){
         const find = this.carrier.find(it => it.carrierId == item)
-        return find ? find.nameCn : ''
+        return find ? find.nameEn : ''
       },
       getDate: getDate,
       find() {
@@ -273,21 +273,21 @@
     computed: {
       filteredData() {
         return this.carrier.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input3)
         })
       },
       filteredDataObj1() {
         return this.port.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input1)
         })
       },
       filteredDataObj2() {
         return this.port.filter((option) => {
-          return option.nameCn
+          return option.nameEn
             .toString()
             .includes(this.input2)
         })

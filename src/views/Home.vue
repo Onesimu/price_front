@@ -6,16 +6,19 @@
           <div class="center-text">
 
             <div class="box">
-              <h1 class="title is-size-1">出口运价</h1>
-              <div class="level">
-                <span class="level-item"><a class="button is-primary is-large">整箱</a></span>
-                <span class="level-item"><a class="button is-large">拼箱</a></span>
+              <h1 class="title is-2 has-text-info">出口运价</h1>
+              <div class="column is-offset-one-quarter is-half">
+                <div class="level">
+                  <span class="level-item"><a class="button is-primary is-medium">整箱</a></span>
+                  <span class="level-item"><a class="button is-medium">拼箱</a></span>
+                </div>
               </div>
+
 
               <form>
                 <div class="field">
-                    <label class="label pull-left">from</label>
-                  <p class="control is-fullwidth is-large">
+                  <label class="label pull-left">from</label>
+                  <p class="control is-fullwidth">
                     <b-autocomplete
                       :size="'is-large'"
                       :expanded="true"
@@ -33,7 +36,7 @@
 
                 <div class="field">
                   <label class="label pull-left">to</label>
-                  <p class="control is-fullwidth is-large">
+                  <p class="control is-fullwidth">
 
                     <b-autocomplete
                       :size="'is-large'"
@@ -210,38 +213,19 @@
 
   $primary: #772b90;
 
-  .home-brief {
-    color: $primary;
+  section.hero {
+    background: #f5f5f5 url('../assets/banner2.jpg') no-repeat;
+    /*filter: grayscale(100%);*/
+    /*background-size:cover;*/
 
-    a.button {
-      color: $primary;
+    .hero-body {
+      padding: 30px 20px;
 
-      &:hover,
-      &:hover span {
-        color: $primary;
+      .box {
+        background-color: rgba(255, 255, 255, 0.7);
       }
     }
 
-    .hvr-buzz {
-      display: flex;
-    }
-  }
-
-  div.is-parent {
-    margin: auto;
-    max-width: 90rem;
-  }
-
-  .vuejs {
-    color: #4fc08d;
-  }
-
-  .bulma {
-    color: #00d1b2;
-  }
-
-  section.hero {
-    background: #f5f5f5 url('../assets/banner2.jpg') no-repeat;
   }
 
   a.button:visited {

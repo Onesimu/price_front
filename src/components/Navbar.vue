@@ -18,7 +18,7 @@
           <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
           </router-link>
-          <a class="nav-item hvr-underline-from-center" href="/home.html" v-if="$db.user">
+          <a class="nav-item hvr-underline-from-center" href="/home" v-if="$db.user">
             退出
           </a>
           <router-link class="nav-item hvr-underline-from-center" to="/manual" v-else>
@@ -60,7 +60,6 @@ export default {
       'toggleLang'
     ]),
     setLang (lang) {
-      console.log(this.$i18n)
       this.$i18n.locale = lang
       this.toggleLang(lang)
     },

@@ -3,7 +3,7 @@
   <h1 class="is-title is-bold">登录</h1>
 
   <div class="columns is-vcentered">
-    <div class="column is-6 is-offset-3">
+    <div class="column is-4 is-offset-4">
       <div class="box">
         <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
         <form v-on:submit.prevent="login">
@@ -18,7 +18,7 @@
 
           <hr>
           <p class="control">
-            <button type="submit" class="button is-primary">登录</button>
+            <button type="submit" class="button is-primary pull-right">登录</button>
             <button type="reset" class="button is-default">取消</button>
           </p>
         </form>

@@ -67,7 +67,7 @@
             </div>
 
             <div>
-              <button class="button is-info" @click="search">搜索</button>
+              <button class="button is-primary" @click="search">搜索</button>
             </div>
           </div>
 

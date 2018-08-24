@@ -109,7 +109,7 @@ a {
 }
 
 .main-container {
-  padding-top: 6rem;
+  padding-top: 5rem;
   padding-bottom: 2rem;
   background-color: whitesmoke;
 

@@ -1,10 +1,10 @@
 <template>
 <div class="content has-text-centered">
-  <h1 class="is-title is-bold">登录</h1>
 
   <div class="columns is-vcentered">
     <div class="column is-4 is-offset-4">
-      <div class="box">
+      <div class="box has-background-light">
+				<h1 class="is-title is-bold">登录</h1>
         <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
         <form v-on:submit.prevent="login">
           <label class="label">用户名</label>
@@ -30,49 +30,59 @@
 
 <script>
   import crypto from 'crypto'
-export default {
+  export default {
 
-  data () {
-    return {
-      data: {
-        body: {
-          username: null,
-          password: null
+    data() {
+      return {
+        data: {
+          body: {
+            username: null,
+            password: null
+          },
+          rememberMe: false
         },
-        rememberMe: false
-      },
-      error: null
-    }
-  },
-  mounted () {
-  },
-  methods: {
-    async findUser (body) {
-      const data = await this.$spring.Userinfo.search('findByStaffNameAndPassword', body)
-      if (data.data()) {
-        this.$db.user = data.data()
-        this.$router.push('/manual')
-        this.$notify.info({content: '欢迎登录'})
-      } else {
-        this.$notify.danger({content: '登录失败'})
+        error: null
       }
     },
-    async login () {
-      const body = this.data.body;
-      body.staffName = body.username
-      body.password = crypto.createHash('md5').update(body.password).digest('hex')
-      this.findUser(body).catch(err => {
-        console.log(err)
-        this.$notify.danger({content: '用户名或密码错'})
-      })
+    mounted() {},
+    methods: {
+      async findUser(body) {
+        const data = await this.$spring.Userinfo.search('findByStaffNameAndPassword', body)
+        if (data.data()) {
+          this.$db.user = data.data()
+          this.$router.push('/manual')
+          this.$notify.info({
+            content: '欢迎登录'
+          })
+        } else {
+          this.$notify.danger({
+            content: '登录失败'
+          })
+        }
+      },
+      async login() {
+        const body = this.data.body;
+        body.staffName = body.username
+        body.password = crypto.createHash('md5').update(body.password).digest('hex')
+        this.findUser(body).catch(err => {
+          console.log(err)
+          this.$notify.danger({
+            content: '用户名或密码错'
+          })
+        })
+      }
     }
-  }
 
-}
+  }
 </script>
 
 <style lang="scss" scoped>
-.is-title {
+  .is-title {
     text-transform: capitalize;
-}
+  }
+
+  .content {
+    padding: 7rem 1vw;
+    background: url("../assets/banner5.png") center no-repeat; // background-size:cover
+  }
 </style>

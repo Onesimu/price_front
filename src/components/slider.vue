@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss" scoped>
-	$banner-height:30vw;
+	$banner-height:25vw;
 	ul li {
 		list-style: none;
 	}

@@ -87,7 +87,7 @@ $main_color : #2b4079;
   .nav {
     margin: 0 auto;
     max-width: 90rem;
-    height: 5rem;
+    height: 4rem;
     color:white;
 
     .nav-item a, a.nav-item {

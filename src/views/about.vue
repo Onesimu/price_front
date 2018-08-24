@@ -18,13 +18,11 @@
 			</div>
 		</div>
 
-		<figure class="image">
-			<img src="../assets/banner4.png">
-		</figure>
+		<slider></slider>
 	</section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 	.has-margin-3 {
 		margin-top: 1rem;
 	}
@@ -34,3 +32,12 @@
 		line-height: 3rem
 	}
 </style>
+
+<script>
+	import slider from '../components/slider'
+	export default {
+		components: {
+			slider
+		},
+	}
+</script>

@@ -1,24 +1,28 @@
 <template>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="column is-6 is-offset-3">
-          <div class="center-text">
+	<section class="hero">
+		<div class="hero-body">
+			<div class="container has-text-centered">
+				<div class="column is-6 is-offset-3">
+					<div class="center-text">
 
-            <div class="box">
-              <h1 class="title is-2 has-text-info">出口运价</h1>
-              <div class="column is-offset-one-quarter is-half">
-                <div class="level">
-                  <span class="level-item"><a class="button is-primary is-medium">整箱</a></span>
-                  <span class="level-item"><a class="button is-medium">拼箱</a></span>
-                </div>
-              </div>
+						<div class="box">
+							<h1 class="title is-2 has-text-info">出口运价</h1>
+							<div class="column is-offset-one-quarter is-half">
+								<div class="level">
+									<span class="level-item">
+										<a class="button is-primary is-medium">整箱</a>
+									</span>
+									<span class="level-item">
+										<a class="button is-medium">拼箱</a>
+									</span>
+								</div>
+							</div>
 
 
-              <form>
-                <div class="field">
-                  <label class="label pull-left">from</label>
-                  <p class="control is-fullwidth">
+							<form>
+								<div class="field">
+									<label class="label pull-left">from</label>
+									<p class="control is-fullwidth">
                     <b-autocomplete
                       :size="'is-large'"
                       :expanded="true"
@@ -29,14 +33,14 @@
                       field="nameEn"
                       :open-on-focus="true"
                       @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
-                    </b-autocomplete>
-                  </p>
+										</b-autocomplete>
+									</p>
 
-                </div>
+								</div>
 
-                <div class="field">
-                  <label class="label pull-left">to</label>
-                  <p class="control is-fullwidth">
+								<div class="field">
+									<label class="label pull-left">to</label>
+									<p class="control is-fullwidth">
 
                     <b-autocomplete
                       :size="'is-large'"
@@ -48,32 +52,30 @@
                       field="nameEn"
                       :open-on-focus="true"
                       @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
-                    </b-autocomplete>
-                  </p>
-                </div>
+										</b-autocomplete>
+									</p>
+								</div>
 
                 <router-link class="button is-primary is-large is-fullwidth"
                              :to="{ path:'info', query: { routeLinePortLoadId: current.routeLinePortLoadId,
                            routeLinePortDischargeId:current.routeLinePortDischargeId }}">
-                <span class="icon is-medium">
-                  <i class="fa fa-search"></i>
-                </span>
-                  <span>搜索</span>
-                </router-link>
+									<span class="icon is-medium">
+										<i class="fa fa-search"></i>
+									</span>
+									<span>搜索</span>
+								</router-link>
 
-              </form>
-            </div>
+							</form>
+						</div>
 
-          </div>
-        </div>
-      </div>
-    </div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <figure class="image">
-      <img src="../assets/banner.jpg">
-    </figure>
+		<slider></slider>
 
-  </section>
+	</section>
 </template>
 
 <script>
@@ -81,6 +83,7 @@
   import {getDate} from "../utils/constants";
   import zh from '../utils/zh'
   import {mapActions, mapGetters} from 'vuex'
+	import slider from '../components/slider'
 
   export default {
 
@@ -96,6 +99,9 @@
       }
     },
     mixins: [crud],
+    components: {
+      slider
+    },
     created() {
       this.entityClass = this.$spring.Seaexpressprice
       this.columns = ['routeLinePortLoadId', 'routeLinePortDischargeId', 'waiPeiCompanyId']
@@ -118,7 +124,7 @@
         const word = this.word;
         const filter = this.data.map(it => it.data()).filter(
           it => [this.portName(it.routeLinePortLoadId), this.portName(it.routeLinePortDischargeId), this.carrierName(it.carrierId)]
-            .join().includes(word))
+          .join().includes(word))
         if (filter.length == 0) {
           this.$notify.warning({
             content: '未查到结果'
@@ -169,7 +175,9 @@
       search() {
         this.searchNormal().catch(error => {
           console.log(error)
-          this.$notify.danger({content: '查询失败,请重新查询'})
+          this.$notify.danger({
+            content: '查询失败,请重新查询'
+          })
         })
       }
     },
@@ -208,24 +216,20 @@
 <style lang="scss" scoped>
   @import '../../node_modules/buefy/src/scss/components/_autocomplete.scss';
   /*@import '../../node_modules/buefy/src/scss/components/_dropdown.scss';*/
+
   @import '~bulma/sass/utilities/variables';
   @import '~hover.css/scss/hover.scss';
-
   $primary: #772b90;
-
   section.hero {
     background: #f5f5f5 url('../assets/banner2.jpg') no-repeat;
     /*filter: grayscale(100%);*/
     /*background-size:cover;*/
-
     .hero-body {
       padding: 30px 20px;
-
       .box {
         background-color: rgba(255, 255, 255, 0.7);
       }
     }
-
   }
 
   a.button:visited {

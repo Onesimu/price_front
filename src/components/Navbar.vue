@@ -24,9 +24,9 @@
           <router-link class="nav-item hvr-underline-from-center" to="/manual" v-else>
             {{$t('header.nav[2]')}}
           </router-link>
-					<a class="nav-item hvr-underline-from-center" href="/about.html">
+					<router-link class="nav-item hvr-underline-from-center" to="/about">
 						{{$t('header.nav[3]')}}
-					</a>
+					</router-link>
         </div>
       </nav>
     </div>

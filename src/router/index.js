@@ -68,6 +68,11 @@ export default new Router({
 
       children: generateRoutes(manual)
     },
+		{
+			name: 'Login-zh-CN',
+			path: '/about',
+			component: loadView('about')
+		},
     {
       path: '*',
       redirect: '/home'

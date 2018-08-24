@@ -19,9 +19,6 @@ Vue.use(VueBlu)
 
 import Promise from 'es6-promise'
 Promise.polyfill()
-// 引入 网络请求模块
-import http from './utils/http.js';
-Vue.prototype.$http = http;
 
 // const spring = require('spring-data-rest-js');
 import spring from 'spring-data-rest-js'

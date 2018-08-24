@@ -52,7 +52,7 @@ export default new Router({
       component: loadView('Home')
     },
     {
-      name: 'Home-zh-CN',
+      name: 'Search-zh-CN',
       path: '/info',
       component: loadView('Table')
     },
@@ -69,7 +69,7 @@ export default new Router({
       children: generateRoutes(manual)
     },
 		{
-			name: 'Login-zh-CN',
+			name: 'About-zh-CN',
 			path: '/about',
 			component: loadView('about')
 		},

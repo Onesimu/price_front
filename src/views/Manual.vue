@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 @import '~bulma/sass/utilities/variables';
 @import '~bulma/sass/utilities/mixins';
-@import '../styles/api-table.css';
+// @import '../styles/api-table.css';
 
 div.is-ancestor {
   margin: auto;

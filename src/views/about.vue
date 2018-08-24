@@ -18,7 +18,7 @@
 			</div>
 		</div>
 
-		<figure class="image-fluent">
+		<figure class="image">
 			<img src="../assets/banner4.png">
 		</figure>
 	</section>

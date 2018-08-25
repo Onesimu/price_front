@@ -39,7 +39,7 @@
                 </div>
               </div>
 
-              <div class="field">
+              <div class="field is-horizontal">
                 <span class="tag is-medium is-white has-text-weight-semibold">承运公司</span>
                 <div class="control">
                   <div class="select">

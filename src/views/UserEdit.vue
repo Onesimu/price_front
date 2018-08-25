@@ -23,7 +23,7 @@
 
             <hr>
             <p class="control">
-              <button type="submit" class="button is-primary">修改</button>
+              <button type="submit" class="button is-primary is-pulled-right">修改</button>
               <button class="button is-default">取消</button>
             </p>
           </form>

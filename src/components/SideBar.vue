@@ -120,7 +120,7 @@ export default {
 <style lang="scss">
 @import '~bulma/sass/utilities/variables';
 @import '~bulma/sass/utilities/mixins';
-$primary: #772b90;
+$primary: #2b4079;
 
 .menu {
 
@@ -177,8 +177,8 @@ $primary: #772b90;
       }
 
       a.is-active {
-        background-color: #cca3da;
-        border-left: 0.3rem $primary solid;
+        // background-color: #cca3da;
+        border-left: 0.3rem solid;
         color: #fff;
       }
 

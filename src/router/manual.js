@@ -18,7 +18,7 @@ export default [
       },
       {
         name: 'Country',
-        icon: 'fa-leaf'
+        icon: 'fa-envira'
       }
     ]
   },
@@ -34,7 +34,7 @@ export default [
 			},
       {
         name: 'UserEdit',
-        icon: 'fa-window-maximize'
+        icon: 'fa-gear'
       }
     ]
   }

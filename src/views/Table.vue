@@ -3,71 +3,74 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <!--<h4 class="title">报价信息</h4>-->
-          <div class="control is-horizontal">
+          <div class="field is-horizontal">
 
-            <div class="control-label">
-              <label class="label">港口</label>
-            </div>
-            <div class="control" is-grouped>
-              <div class="select is-expanded">
-                <b-autocomplete
-                  :value="portName(current.routeLinePortLoadId)"
-                  @input="value => input1 = value"
-                  placeholder="起始港"
-                  :data="filteredDataObj1"
-                  field="nameEn"
-                  :open-on-focus="true"
-                  @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
-                </b-autocomplete>
+            <!-- <div class="field-label is-normal">
+                             <label class="label">From</label>
+                         </div> -->
+            <div class="field-body">
+              <div class="field">
+                <span class="tag is-medium is-white has-text-weight-semibold">起始港</span>
+                <div class="select is-expanded">
+                  <b-autocomplete
+                    :value="portName(current.routeLinePortLoadId)"
+                    @input="value => input1 = value"
+                    placeholder="起始港"
+                    :data="filteredDataObj1"
+                    field="nameEn"
+                    :open-on-focus="true"
+                    @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
+                  </b-autocomplete>
+                </div>
               </div>
 
-              <div class="select is-expanded" >
-                <b-autocomplete
-                  :value="portName(current.routeLinePortDischargeId)"
-                  @input="value => input2 = value"
-                  placeholder="目的港"
-                  :data="filteredDataObj2"
-                  field="nameEn"
-                  :open-on-focus="true"
-                  @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
-                </b-autocomplete>
+              <div class="field">
+                <span class="tag is-medium is-white has-text-weight-semibold">目的港</span>
+                <div class="select is-expanded">
+                  <b-autocomplete
+                    :value="portName(current.routeLinePortDischargeId)"
+                    @input="value => input2 = value"
+                    placeholder="目的港"
+                    :data="filteredDataObj2"
+                    field="nameEn"
+                    :open-on-focus="true"
+                    @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
+                  </b-autocomplete>
+                </div>
               </div>
-            </div>
 
-            <div class="control">
-            <div class="control-label">
-              <label class="label">承运公司</label>
-            </div>
-            <div class="control">
-              <div class="select">
-                <b-autocomplete
-                  :value="carrierName(current.waiPeiCompanyId)"
-                  @input="value => input3 = value"
-                  placeholder="承运公司"
-                  :data="filteredData"
-                  field="nameEn"
-                  :open-on-focus="true"
-                  @select="option => current.waiPeiCompanyId = option && option.carrierId">
-                </b-autocomplete>
+              <div class="field">
+                <span class="tag is-medium is-white has-text-weight-semibold">承运公司</span>
+                <div class="control">
+                  <div class="select">
+                    <b-autocomplete
+                      :value="carrierName(current.waiPeiCompanyId)"
+                      @input="value => input3 = value"
+                      placeholder="承运公司"
+                      :data="filteredData"
+                      field="nameEn"
+                      :open-on-focus="true"
+                      @select="option => current.waiPeiCompanyId = option && option.carrierId">
+                    </b-autocomplete>
+                  </div>
+                </div>
               </div>
-            </div>
-            </div>
 
-            <div class="control">
-              <div class="control-label">
-                <label class="label">生效日期</label>
-              </div>
-              <div class="control">
-                <p class="control has-addons">
+              <div class="field">
+
+                <div class="control has-addons">
+                  <span class="tag is-medium is-white has-text-weight-semibold">生效日期</span>
                   <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
                   <datepicker placeholder="生效日期" :options="localeOption" v-model="current.fromDate"></datepicker>
-                </p>
-              </div>
-            </div>
 
-            <div>
-              <button class="button is-primary" @click="search">搜索</button>
+                  <button class="button is-primary" @click="search">搜索</button>
+                </div>
+              </div>
+
+              <!--   <div class="field is-pulled-right">
+                    <button class="button is-primary" @click="search">搜索</button>
+                  </div> -->
+
             </div>
           </div>
 
@@ -88,9 +91,9 @@
 
             <!--<column label="报价编号" field="sePriceId"></column>-->
 
-  <!--          <column label="起始港" field="routeLinePortLoadNameCn"></column>
-            <column label="目的港" field="routeLinePortDischargeNameCn"></column>
-            <column label="中转港" field="transPortNameCn"></column>-->
+            <!--          <column label="起始港" field="routeLinePortLoadNameCn"></column>
+                        <column label="目的港" field="routeLinePortDischargeNameCn"></column>
+                        <column label="中转港" field="transPortNameCn"></column>-->
 
             <column label="起始港" field="routeLinePortLoadId">
               <template slot-scope="row">
@@ -151,8 +154,8 @@
         // country:[],
         selected: {},
         input1: '',
-        input2:'',
-        input3:'',
+        input2: '',
+        input3: '',
         localeOption: {
           locale: zh,
         },
@@ -172,12 +175,12 @@
     // mixins: [crud],
     created() {
       this.entityClass = this.$spring.SeaexpresspriceView
-      this.columns = ['routeLinePortLoadId','routeLinePortDischargeId','waiPeiCompanyId']
+      this.columns = ['routeLinePortLoadId', 'routeLinePortDischargeId', 'waiPeiCompanyId']
     },
-    mounted(){
+    mounted() {
       const query = this.$route.query;
       // console.log(query)
-      if(query.routeLinePortDischargeId && query.routeLinePortDischargeId){
+      if (query.routeLinePortDischargeId && query.routeLinePortDischargeId) {
         this.current = query
         this.search()
       } else {
@@ -208,7 +211,7 @@
         const find = this.port.find(it => it.portId == item)
         return find ? find.nameEn : ''
       },
-      carrierName(item = this.current.waiPeiCompanyId){
+      carrierName(item = this.current.waiPeiCompanyId) {
         const find = this.carrier.find(it => it.carrierId == item)
         return find ? find.nameEn : ''
       },
@@ -216,7 +219,7 @@
       find() {
         const word = this.word;
         const filter = this.data.map(it => it.data()).filter(
-          it => [this.portName(it.routeLinePortLoadId),this.portName(it.routeLinePortDischargeId),this.carrierName(it.carrierId)]
+          it => [this.portName(it.routeLinePortLoadId), this.portName(it.routeLinePortDischargeId), this.carrierName(it.carrierId)]
             .join().includes(word))
         if (filter.length == 0) {
           this.$notify.warning({
@@ -226,7 +229,7 @@
         }
         this.viewData = filter
       },
-      localSearch(){
+      localSearch() {
         const search = this.current
         const predict = it =>
           search.routeLinePortLoadId === it.routeLinePortLoadId &&
@@ -245,11 +248,11 @@
         const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
 
         let predict = it => true
-        if(search.waiPeiCompanyId){
+        if (search.waiPeiCompanyId) {
           predict = it =>
             search.waiPeiCompanyId === it.waiPeiCompanyId
         }
-        if(search.fromDate){
+        if (search.fromDate) {
           predict = it =>
             search.waiPeiCompanyId === it.waiPeiCompanyId &&
             it.fromDate.startsWith(search.fromDate)
@@ -264,7 +267,7 @@
         }
         this.viewData = filter
       },
-      search(){
+      search() {
         this.searchNormal().catch(error => {
           console.log(error)
           this.$notify.danger({content: '查询失败,请重新查询'})})

@@ -2,19 +2,7 @@
   <section class="hero is-bold app-navbar animated" :class="{ slideInDown: showHead, slideOutDown: !showHead }">
     <div class="hero-head">
       <nav class="nav">
-        <div class="nav-left">
-<!--          <a class="nav-item hero-brand is-hidden-tablet" href="/#/home">
-            <img src="~assets/logo.png">
-            Vue Bulma
-          </a>-->
-<!--          <a class="nav-item hero-brand is-hidden-mobile" href="/#/home">
-            &lt;!&ndash;<img class="tour-logo" src="~assets/logo.png">&ndash;&gt;
-            <div class="tour-title">
-              <span class="vue">运费</span><span class="bulma">系统</span>
-            </div>
-          </a>-->
-        </div>
-        <div class="nav-right is-flex">
+        <div class="nav-left is-flex">
           <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
           </router-link>

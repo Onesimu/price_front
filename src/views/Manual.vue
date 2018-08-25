@@ -63,7 +63,7 @@ export default {
 
 div.is-ancestor {
   margin: auto;
-  max-width: 90rem;
+  max-width: 100%;
   min-height: 50rem;
 
   .is-parent > .card {

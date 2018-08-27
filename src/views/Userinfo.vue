@@ -8,7 +8,7 @@
           <data-table :data="viewData" striped checkable show-index :pagination="pagination" rowKey="id" :on-select-change="onSelectChange"
                       :change="onTableChange" >
             <table-toolbar has-refresh has-columns-control>
-              <template slot="left" v-if="$db.user.logintype == 2">
+              <template slot="left" v-if="user.logintype == 2">
                 <div class="level-item">
                   <a class="button is-primary" @click="handleEdit" :class="{'is-disabled': !hasSelect}">
 										<span class="icon is-small">
@@ -143,6 +143,11 @@
         this.current.password = crypto.createHash('md5').update(password).digest('hex')
         this.current.logintype = 0
         this.save()
+      }
+    },
+    computed:{
+      user(){
+        return this.$store.getters.user
       }
     }
   }

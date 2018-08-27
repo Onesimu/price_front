@@ -3,7 +3,7 @@
 
   <div class="columns is-vcentered">
     <div class="column is-4 is-offset-4">
-      <div class="box has-background-light">
+      <div class="box">
 				<h1 class="is-title is-bold">登录</h1>
         <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
         <form v-on:submit.prevent="login">
@@ -85,5 +85,10 @@
   .content {
     padding: 7rem 1vw;
     background: url("../assets/banner5.png") center no-repeat; // background-size:cover
+
+    .box{
+      background-color: hsla(0, 0%, 100%, 0.7);
+    }
   }
+
 </style>

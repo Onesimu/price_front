@@ -25,6 +25,13 @@ import spring from 'spring-data-rest-js'
 spring.requestConfig.baseURL = '//';
 spring.entityConfig.restBaseURL = '//rest//';
 // spring.requestConfig.globalFetchOptions.credentials = 'omit'
+spring.requestConfig.globalFetchOptions = {
+  headers: {
+    'Content-Type': 'application/json',
+    'AuthToken':'auth'
+  },
+  credentials: 'same-origin'
+},
 
 spring.Carrier = spring.extend('carriers');
 spring.Country = spring.extend('countries');

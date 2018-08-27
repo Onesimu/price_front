@@ -17,29 +17,32 @@ const state = {
   effect: {
     translate3d: true
   },
-  db:{country:[],port:[],carrier:[]}
+  db: {country: [], port: [], carrier: [], user: {}}
 }
 
 const mutations = {
-  country(state,country){
+  country(state, country) {
     state.db.country = country
   },
-  port(state,port){
+  port(state, port) {
     state.db.port = port
   },
-  carrier(state,carrier){
+  carrier(state, carrier) {
     state.db.carrier = carrier
   },
-  [types.TOGGLE_DEVICE] (state, device) {
+  user(state,user){
+    state.db.user = user
+  },
+  [types.TOGGLE_DEVICE](state, device) {
     state.device.isMobile = device === 'mobile'
     state.device.isTablet = device === 'tablet'
   },
 
-  [types.TOGGLE_PAGE] (state, pageName) {
+  [types.TOGGLE_PAGE](state, pageName) {
     state.current.page = pageName
   },
 
-  [types.TOGGLE_SIDEBAR] (state, opened) {
+  [types.TOGGLE_SIDEBAR](state, opened) {
     if (state.device.isMobile) {
       state.sidebar.opened = opened
     } else {
@@ -47,13 +50,13 @@ const mutations = {
     }
   },
 
-  [types.SWITCH_EFFECT] (state, effectItem) {
+  [types.SWITCH_EFFECT](state, effectItem) {
     for (let name in effectItem) {
       state.effect[name] = effectItem[name]
     }
   },
 
-  [types.TOGGLE_LANG] (state, lang) {
+  [types.TOGGLE_LANG](state, lang) {
     if (state.current.lang === lang) return
 
     router.push(router.currentRoute.path.replace(state.current.lang, lang))

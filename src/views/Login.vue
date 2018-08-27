@@ -48,8 +48,9 @@
     methods: {
       async findUser(body) {
         const data = await this.$spring.Userinfo.search('findByStaffNameAndPassword', body)
-        if (data.data()) {
-          this.$db.user = data.data()
+        const user = data.data();
+        if (user) {
+          this.$store.commit('user',user)
           this.$router.push('/manual')
           this.$notify.info({
             content: '欢迎登录'

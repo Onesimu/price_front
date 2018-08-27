@@ -31,7 +31,7 @@ spring.requestConfig.globalFetchOptions = {
     'AuthToken':'auth'
   },
   credentials: 'same-origin'
-},
+}
 
 spring.Carrier = spring.extend('carriers');
 spring.Country = spring.extend('countries');

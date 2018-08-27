@@ -55,12 +55,12 @@
     methods: {
       async findUser (body) {
         const entityClass = this.$spring.Userinfo;
-        const entity = new entityClass(this.$db.user);
+        const entity = new entityClass(this.$store.getters.user);
         entity.patchData(body)
         entity.modifyFields = ['password']
         const data = await entity.save()
         if (data) {
-          this.$db.user = data
+          this.$store.commit('user',data)
           this.$router.push('/manual')
           this.$notify.info({content: '修改成功'})
         } else {
@@ -74,7 +74,7 @@
           return
         }
         const old = crypto.createHash('md5').update(body.old).digest('hex')
-        if(old != this.$db.user.password){
+        if(old != this.$store.getters.user.password){
           this.$notify.danger({content:'原密码不正确'})
           return
         }

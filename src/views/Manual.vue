@@ -38,7 +38,7 @@ export default {
   },
 
   mounted () {
-    if(!this.$db.user){
+    if(!this.$store.getters.user.staffName){
       this.$notify.danger({content:'请先登录'})
       this.$router.push('/login')
       return

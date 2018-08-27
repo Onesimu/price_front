@@ -6,12 +6,18 @@
           <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
           </router-link>
-          <a class="nav-item hvr-underline-from-center" href="/home" v-if="$db.user">
-            退出
-          </a>
-          <router-link class="nav-item hvr-underline-from-center" to="/manual" v-else>
+          <router-link class="nav-item hvr-underline-from-center" to="/info">
+            查询
+          </router-link>
+          <router-link class="nav-item hvr-underline-from-center" to="/login" v-if="!user.staffName">
             {{$t('header.nav[2]')}}
           </router-link>
+          <router-link class="nav-item hvr-underline-from-center" to="/manual" v-if="user.staffName">
+            {{$t('header.nav[1]')}}
+          </router-link>
+          <a class="nav-item hvr-underline-from-center" href="/" v-if="user.staffName">
+            退出
+          </a>
 					<router-link class="nav-item hvr-underline-from-center" to="/about">
 						{{$t('header.nav[3]')}}
 					</router-link>
@@ -40,7 +46,8 @@ export default {
 
   computed: mapGetters({
     device: 'device',
-    current: 'current'
+    current: 'current',
+    user: 'user'
   }),
 
   methods: {
@@ -54,6 +61,9 @@ export default {
     logout(){
       this.$db.user = {}
       this.$router.push('/home.html')
+      this.$store.dispatch('LogOut').then(() => {
+        location.reload() // 为了重新实例化vue-router对象 避免bug
+      })
     }
   }
 }

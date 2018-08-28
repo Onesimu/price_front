@@ -2,7 +2,18 @@
   <section class="hero is-bold app-navbar animated" :class="{ slideInDown: showHead, slideOutDown: !showHead }">
     <div class="hero-head">
       <nav class="nav">
-        <div class="nav-left is-flex">
+        <div class="nav-left">
+          <a class="nav-item hero-brand is-hidden-tablet" href="/#/home">
+            <img src="~assets/logo.png">
+          </a>
+          <a class="nav-item hero-brand is-hidden-mobile" href="/#/home">
+            <!--<img class="tour-logo" src="~assets/logo.png">-->
+            <div class="tour-title">
+              <span class="vue">同泰物流</span>
+            </div>
+          </a>
+        </div>
+        <div class="nav-right is-flex">
           <router-link class="nav-item hvr-underline-from-center" to="/home">
             {{$t('header.nav[0]')}}
           </router-link>
@@ -16,11 +27,11 @@
             {{$t('header.nav[1]')}}
           </router-link>
           <a class="nav-item hvr-underline-from-center" href="/" v-if="user.staffName">
-            退  出
+            退 出
           </a>
-					<router-link class="nav-item hvr-underline-from-center" to="/about">
-						{{$t('header.nav[3]')}}
-					</router-link>
+          <router-link class="nav-item hvr-underline-from-center" to="/about">
+            {{$t('header.nav[3]')}}
+          </router-link>
         </div>
       </nav>
     </div>
@@ -67,6 +78,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -115,7 +127,8 @@ $main_color : #2b4079;
   }
 
   .tour-title {
-    font-size: 1.75rem;
+    font-size: 2.55rem;
+    font-family: cursive;
 
     .vue {
       margin-left: 10px;
@@ -149,10 +162,6 @@ $main_color : #2b4079;
       padding: 0.25rem 1.5rem;
       margin: 0;
       display: block;
-
-      a:hover {
-        color: $primary;
-      }
     }
   }
 }
@@ -164,5 +173,6 @@ $main_color : #2b4079;
     background: $primary;
   }
 }
+
 
 </style>

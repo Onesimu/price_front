@@ -78,10 +78,6 @@ $primary: #772b90;
 
 a {
   color: rgba(119, 43, 144, 0.8);
-
-  :hover   {
-    color: $primary;
-  }
 }
 
 .nprogress-container {

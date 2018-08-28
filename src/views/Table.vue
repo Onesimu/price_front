@@ -75,14 +75,14 @@
               </template>
               <template slot="right">
                 <span class="tag is-medium is-white has-text-weight-semibold">开航日</span>
-                <checkbox-group>
-                  <checkbox val="MON">MON</checkbox>
-                  <checkbox val="TUE">TUE</checkbox>
-                  <checkbox val="WED">WED</checkbox>
-                  <checkbox val="THU">THU</checkbox>
-                  <checkbox val="FRI">FRI</checkbox>
-                  <checkbox val="SAT">SAT</checkbox>
-                  <checkbox val="SUN">SUN</checkbox>
+                <checkbox-group v-model="scheduleArray">
+                  <checkbox val="MON" @change="findBySchedule">MON</checkbox>
+                  <checkbox val="TUE" @change="findBySchedule">TUE</checkbox>
+                  <checkbox val="WED" @change="findBySchedule">WED</checkbox>
+                  <checkbox val="THU" @change="findBySchedule">THU</checkbox>
+                  <checkbox val="FRI" @change="findBySchedule">FRI</checkbox>
+                  <checkbox val="SAT" @change="findBySchedule">SAT</checkbox>
+                  <checkbox val="SUN" @change="findBySchedule">SUN</checkbox>
                 </checkbox-group>
 
                 <div class="field">
@@ -220,6 +220,10 @@
         return find ? find.nameEn : ''
       },
       getDate: getDate,
+      findBySchedule(option){
+        console.log(option)
+      // alert(option)
+      },
       findByCompany(option){
         this.current.waiPeiCompanyId = option && option.carrierId
         const search = this.current
@@ -279,6 +283,34 @@
             .toString()
             .includes(this.input2)
         })
+      },
+      scheduleArray: {
+        get() {
+          const val = this.current.schedule ? this.current.schedule : [];
+          // console.log(this.current.schedule, val)
+          return val
+        },
+        set(val) {
+          // console.log(this.current.schedule, val)
+          this.current.schedule = val
+
+          const search = this.current
+          let predict = it => true
+          if (search.schedule) {
+            predict = it =>
+               it.schedule.split('/').some(t => search.schedule.includes(t))
+          }
+
+          const filter = this.viewData.filter(predict)
+          if (filter.length == 0) {
+            this.$notify.info({
+              content: '未查到结果'
+            })
+            return
+          }
+          this.viewData = filter
+          this.pagination.total = filter.length
+        }
       },
       ...mapGetters({
         port: 'port',

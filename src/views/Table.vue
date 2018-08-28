@@ -67,7 +67,7 @@
                         :data="filteredData"
                         field="nameEn"
                         :open-on-focus="true"
-                        @select="option => current.waiPeiCompanyId = option && option.carrierId">
+                        @select="findByCompany">
                       </b-autocomplete>
                     </div>
                   </div>
@@ -112,11 +112,6 @@
             <column label="目的港" field="routeLinePortDischargeId">
               <template slot-scope="row">
                 <span>{{ portName(row.routeLinePortDischargeId) }}</span>
-              </template>
-            </column>
-            <column label="中转港" field="transPortId">
-              <template slot-scope="row">
-                <span>{{ portName(row.transPortId) }}</span>
               </template>
             </column>
 
@@ -213,7 +208,7 @@
       },
       onTableChange(params) {
         // console.log(params)
-        this.getData()
+        //this.getData()
       },
       portName(item = this.current.portId) {
         // console.log(this.port,this.current)
@@ -225,49 +220,16 @@
         return find ? find.nameEn : ''
       },
       getDate: getDate,
-      find() {
-        const word = this.word;
-        const filter = this.data.map(it => it.data()).filter(
-          it => [this.portName(it.routeLinePortLoadId), this.portName(it.routeLinePortDischargeId), this.carrierName(it.carrierId)]
-            .join().includes(word))
-        if (filter.length == 0) {
-          this.$notify.warning({
-            content: '未查到结果'
-          })
-          return
-        }
-        this.viewData = filter
-      },
-      localSearch() {
+      findByCompany(option){
+        this.current.waiPeiCompanyId = option && option.carrierId
         const search = this.current
-        const predict = it =>
-          search.routeLinePortLoadId === it.routeLinePortLoadId &&
-          search.routeLinePortDischargeId === it.routeLinePortDischargeId
-        const filter = this.data.map(it => it.data()).filter(predict)
-        if (filter.length == 0) {
-          this.$notify.info({
-            content: '未查到结果'
-          })
-          return
-        }
-        this.viewData = filter
-      },
-      async searchNormal() {
-        const search = this.current
-        const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
-
         let predict = it => true
         if (search.waiPeiCompanyId) {
           predict = it =>
             search.waiPeiCompanyId === it.waiPeiCompanyId
         }
-        if (search.fromDate) {
-          predict = it =>
-            search.waiPeiCompanyId === it.waiPeiCompanyId &&
-            it.fromDate.startsWith(search.fromDate)
-        }
 
-        const filter = json.map(it => it.data()).filter(predict)
+        const filter = this.viewData.filter(predict)
         if (filter.length == 0) {
           this.$notify.info({
             content: '未查到结果'
@@ -275,6 +237,20 @@
           return
         }
         this.viewData = filter
+        this.pagination.total = filter.length
+      },
+      async searchNormal() {
+        const search = this.current
+        const json = await this.entityClass.search('findAllByRouteLinePortLoadIdAndRouteLinePortDischargeId', search)
+
+        if (json.length == 0) {
+          this.$notify.info({
+            content: '未查到结果'
+          })
+          return
+        }
+        const filter = json.map(it => it.data())
+        this.viewData = this.data = filter
       },
       search() {
         this.searchNormal().catch(error => {

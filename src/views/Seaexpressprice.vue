@@ -276,21 +276,21 @@
         return this.carrier.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input3)
+            .includes(this.input3.toUpperCase())
         })
       },
       filteredDataObj1() {
         return this.port.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input1)
+            .includes(this.input1.toUpperCase())
         })
       },
       filteredDataObj2() {
         return this.port.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input2)
+            .includes(this.input2.toUpperCase())
         })
       },
       port() {

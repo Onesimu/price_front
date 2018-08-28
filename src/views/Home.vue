@@ -186,21 +186,21 @@
         return this.port.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input1)
+            .includes(this.input1.toUpperCase())
         })
       },
       filteredDataObj2() {
         return this.port.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input2)
+            .includes(this.input2.toUpperCase())
         })
       },
       filteredData() {
         return this.carrier.filter((option) => {
           return option.nameEn
             .toString()
-            .includes(this.input)
+            .includes(this.input.toUpperCase())
         })
       },
       ...mapGetters({

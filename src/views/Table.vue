@@ -53,7 +53,7 @@
             </div>
           </div>
 
-          <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id" :change="onTableChange">
+          <data-table :data="viewData" :pagination="pagination" rowKey="id" :change="onTableChange">
             <table-toolbar has-columns-control>
               <template slot="left">
                 <div class="field is-horizontal">
@@ -115,7 +115,7 @@
             <column label="40HQ" field="publicPrice_40Hq" sorter="custom"></column>
             <column label="45HQ" field="publicPrice_45Hq" sorter="custom"></column>
             <column label="40RD" field="publicPrice_40Rd" sorter="custom"></column>
-            <column label="公司" field="waiPeiCompanyId">
+            <column label="船司" field="waiPeiCompanyId">
               <template slot-scope="row">
                 <span>{{ carrierName(row.waiPeiCompanyId) }}</span>
               </template>
@@ -294,7 +294,10 @@
           // console.log(this.current.schedule, val)
           this.current.schedule = val
 
-          if(val == [])return
+          if(val == []){
+            this.refresh()
+            return
+          }
 
           const search = this.current
           let predict = it => true

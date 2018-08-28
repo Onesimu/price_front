@@ -7,7 +7,7 @@
 				<div class="column is-6 is-offset-3">
 					<div class="box has-text-centered">
 						<h1 class="title is-2">联系我们</h1>
-						<h2 class="title">信息技术有限公司</h2>
+						<h2 class="title">同泰物流（深圳）有限公司</h2>
 							<p class="social is-large">
 							地址：河北石家庄
 							<br> 邮编：05000

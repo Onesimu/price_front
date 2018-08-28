@@ -4,7 +4,7 @@
       <div class="content has-text-centered">
         <p class="social">
           Copyright@2012-2018<br>
-          河北信息技术有限公司<br>
+          同泰物流（深圳）有限公司<br>
         </p>
       </div>
     </div>

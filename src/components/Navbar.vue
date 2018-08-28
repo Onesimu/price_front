@@ -7,7 +7,7 @@
             {{$t('header.nav[0]')}}
           </router-link>
           <router-link class="nav-item hvr-underline-from-center" to="/info">
-            查询
+            运价查询
           </router-link>
           <router-link class="nav-item hvr-underline-from-center" to="/login" v-if="!user.staffName">
             {{$t('header.nav[2]')}}
@@ -16,7 +16,7 @@
             {{$t('header.nav[1]')}}
           </router-link>
           <a class="nav-item hvr-underline-from-center" href="/" v-if="user.staffName">
-            退出
+            退  出
           </a>
 					<router-link class="nav-item hvr-underline-from-center" to="/about">
 						{{$t('header.nav[3]')}}

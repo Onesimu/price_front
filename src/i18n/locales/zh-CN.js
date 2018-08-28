@@ -1,7 +1,7 @@
 export default {
   header: {
     desc: '丰富的响应式组件库',
-    nav: ['首页', '管理', '登录', '关于']
+    nav: ['首  页', '运价管理', '登  录', '关于我们']
   },
   home: {
   	brief: [

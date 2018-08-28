@@ -54,7 +54,7 @@
           </div>
 
           <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id" :change="onTableChange">
-            <table-toolbar has-refresh has-columns-control>
+            <table-toolbar has-columns-control>
               <template slot="left">
                 <div class="field is-horizontal">
                   <span class="tag is-medium is-white has-text-weight-semibold">船公司</span>
@@ -74,26 +74,20 @@
                 </div>
               </template>
               <template slot="right">
-                <span class="tag is-medium is-white has-text-weight-semibold">开航日</span>
-                <checkbox-group v-model="scheduleArray">
-                  <checkbox val="MON" @change="findBySchedule">MON</checkbox>
-                  <checkbox val="TUE" @change="findBySchedule">TUE</checkbox>
-                  <checkbox val="WED" @change="findBySchedule">WED</checkbox>
-                  <checkbox val="THU" @change="findBySchedule">THU</checkbox>
-                  <checkbox val="FRI" @change="findBySchedule">FRI</checkbox>
-                  <checkbox val="SAT" @change="findBySchedule">SAT</checkbox>
-                  <checkbox val="SUN" @change="findBySchedule">SUN</checkbox>
-                </checkbox-group>
+                  <span class="tag is-medium is-white has-text-weight-semibold">开航日</span>
+                  <checkbox-group v-model="scheduleArray">
+                    <checkbox val="MON" @change="findBySchedule">MON</checkbox>
+                    <checkbox val="TUE" @change="findBySchedule">TUE</checkbox>
+                    <checkbox val="WED" @change="findBySchedule">WED</checkbox>
+                    <checkbox val="THU" @change="findBySchedule">THU</checkbox>
+                    <checkbox val="FRI" @change="findBySchedule">FRI</checkbox>
+                    <checkbox val="SAT" @change="findBySchedule">SAT</checkbox>
+                    <checkbox val="SUN" @change="findBySchedule">SUN</checkbox>
+                  </checkbox-group>
 
+                <div class="column is-large"></div>
                 <div class="field">
-
-                  <div class="control has-addons">
-                    <span class="tag is-medium is-white has-text-weight-semibold">生效日期</span>
-                    <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
-                    <datepicker placeholder="生效日期" :options="localeOption" v-model="current.fromDate"></datepicker>
-
-                    <button class="button is-primary" @click="search">搜索</button>
-                  </div>
+                  <button class="button is-primary" @click="refresh">刷新</button>
                 </div>
               </template>
             </table-toolbar>
@@ -210,6 +204,12 @@
         // console.log(params)
         //this.getData()
       },
+      refresh(){
+        // this.getData()
+        // this.current = {}
+        // this.scheduleArray = []
+        location.reload()
+      },
       portName(item = this.current.portId) {
         // console.log(this.port,this.current)
         const find = this.port.find(it => it.portId == item)
@@ -294,6 +294,8 @@
           // console.log(this.current.schedule, val)
           this.current.schedule = val
 
+          if(val == [])return
+
           const search = this.current
           let predict = it => true
           if (search.schedule) {
@@ -302,12 +304,7 @@
           }
 
           const filter = this.viewData.filter(predict)
-          if (filter.length == 0) {
-            this.$notify.info({
-              content: '未查到结果'
-            })
-            return
-          }
+
           this.viewData = filter
           this.pagination.total = filter.length
         }

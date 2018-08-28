@@ -3,88 +3,97 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <div class="field is-horizontal">
 
-            <!-- <div class="field-label is-normal">
-                             <label class="label">From</label>
-                         </div> -->
-            <div class="field-body">
-              <div class="field">
-                <span class="tag is-medium is-white has-text-weight-semibold">起始港</span>
-                <div class="select is-expanded">
-                  <b-autocomplete
-                    :value="portName(current.routeLinePortLoadId)"
-                    @input="value => input1 = value"
-                    placeholder="起始港"
-                    :data="filteredDataObj1"
-                    field="nameEn"
-                    :open-on-focus="true"
-                    @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
-                  </b-autocomplete>
-                </div>
+          <div class="column has-background-info">
+            <div class="field is-horizontal">
+
+              <div class="field-label is-normal">
+                <label class="label">From</label>
               </div>
-
-              <div class="field">
-                <span class="tag is-medium is-white has-text-weight-semibold">目的港</span>
-                <div class="select is-expanded">
-                  <b-autocomplete
-                    :value="portName(current.routeLinePortDischargeId)"
-                    @input="value => input2 = value"
-                    placeholder="目的港"
-                    :data="filteredDataObj2"
-                    field="nameEn"
-                    :open-on-focus="true"
-                    @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
-                  </b-autocomplete>
-                </div>
-              </div>
-
-              <div class="field is-horizontal">
-                <span class="tag is-medium is-white has-text-weight-semibold">承运公司</span>
-                <div class="control">
-                  <div class="select">
+              <div class="field-body">
+                <div class="field">
+                  <span class="tag is-medium is-white has-text-weight-semibold">起始港</span>
+                  <div class="select is-expanded">
                     <b-autocomplete
-                      :value="carrierName(current.waiPeiCompanyId)"
-                      @input="value => input3 = value"
-                      placeholder="承运公司"
-                      :data="filteredData"
+                      :value="portName(current.routeLinePortLoadId)"
+                      @input="value => input1 = value"
+                      placeholder="起始港"
+                      :data="filteredDataObj1"
                       field="nameEn"
                       :open-on-focus="true"
-                      @select="option => current.waiPeiCompanyId = option && option.carrierId">
+                      @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
                     </b-autocomplete>
                   </div>
                 </div>
-              </div>
 
-              <div class="field">
-
-                <div class="control has-addons">
-                  <span class="tag is-medium is-white has-text-weight-semibold">生效日期</span>
-                  <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
-                  <datepicker placeholder="生效日期" :options="localeOption" v-model="current.fromDate"></datepicker>
-
-                  <button class="button is-primary" @click="search">搜索</button>
+                <div class="field-label is-normal">
+                  <label class="label">To</label>
                 </div>
+
+                <div class="field">
+                  <span class="tag is-medium is-white has-text-weight-semibold">目的港</span>
+                  <div class="select is-expanded">
+                    <b-autocomplete
+                      :value="portName(current.routeLinePortDischargeId)"
+                      @input="value => input2 = value"
+                      placeholder="目的港"
+                      :data="filteredDataObj2"
+                      field="nameEn"
+                      :open-on-focus="true"
+                      @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
+                    </b-autocomplete>
+                  </div>
+                </div>
+
+                <div class="field is-expanded">
+                  <button class="button is-warning" @click="search">搜索</button>
+                </div>
+
               </div>
-
-              <!--   <div class="field is-pulled-right">
-                    <button class="button is-primary" @click="search">搜索</button>
-                  </div> -->
-
             </div>
           </div>
 
-          <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id"
-                      :change="onTableChange">
+          <data-table :data="viewData" striped show-index :pagination="pagination" rowKey="id" :change="onTableChange">
             <table-toolbar has-refresh has-columns-control>
               <template slot="left">
+                <div class="field is-horizontal">
+                  <span class="tag is-medium is-white has-text-weight-semibold">船公司</span>
+                  <div class="control">
+                    <div class="select">
+                      <b-autocomplete
+                        :value="carrierName(current.waiPeiCompanyId)"
+                        @input="value => input3 = value"
+                        placeholder="承运公司"
+                        :data="filteredData"
+                        field="nameEn"
+                        :open-on-focus="true"
+                        @select="option => current.waiPeiCompanyId = option && option.carrierId">
+                      </b-autocomplete>
+                    </div>
+                  </div>
+                </div>
               </template>
               <template slot="right">
-                <div class="level-item">
-                  <p class="control has-addons">
-                    <input class="input" placeholder="过滤条件" v-model="word">
-                    <button class="button" @click="find">过滤</button>
-                  </p>
+                <span class="tag is-medium is-white has-text-weight-semibold">开航日</span>
+                <checkbox-group>
+                  <checkbox val="MON">MON</checkbox>
+                  <checkbox val="TUE">TUE</checkbox>
+                  <checkbox val="WED">WED</checkbox>
+                  <checkbox val="THU">THU</checkbox>
+                  <checkbox val="FRI">FRI</checkbox>
+                  <checkbox val="SAT">SAT</checkbox>
+                  <checkbox val="SUN">SUN</checkbox>
+                </checkbox-group>
+
+                <div class="field">
+
+                  <div class="control has-addons">
+                    <span class="tag is-medium is-white has-text-weight-semibold">生效日期</span>
+                    <!--<input class="input" type="date" placeholder="生效日期" v-model="current.fromDate">-->
+                    <datepicker placeholder="生效日期" :options="localeOption" v-model="current.fromDate"></datepicker>
+
+                    <button class="button is-primary" @click="search">搜索</button>
+                  </div>
                 </div>
               </template>
             </table-toolbar>
@@ -306,5 +315,7 @@
 </script>
 
 <style lang="scss" scoped>
-  /*@import '../../node_modules/buefy/lib/buefy.css';*/
+	.column {
+		margin-bottom: 10px
+	}
 </style>

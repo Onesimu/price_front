@@ -7,13 +7,12 @@
           <div class="column has-background-info">
             <div class="field is-horizontal">
 
-              <div class="field-label is-normal">
+              <div class="field-label is-medium">
                 <label class="label">From</label>
               </div>
               <div class="field-body">
+                <span class="tag is-medium is-white has-text-weight-semibold">起始港</span>
                 <div class="field">
-                  <span class="tag is-medium is-white has-text-weight-semibold">起始港</span>
-                  <div class="select is-expanded">
                     <b-autocomplete
                       :value="portName(current.routeLinePortLoadId)"
                       @input="value => input1 = value"
@@ -23,16 +22,15 @@
                       :open-on-focus="true"
                       @select="option => current.routeLinePortLoadId = option ? option.portId : ''">
                     </b-autocomplete>
-                  </div>
                 </div>
 
-                <div class="field-label is-normal">
+                <!--<span class="tag is-medium">-></span>-->
+
+                <div class="field-label is-medium">
                   <label class="label">To</label>
                 </div>
-
+                <span class="tag is-medium is-white has-text-weight-semibold">目的港</span>
                 <div class="field">
-                  <span class="tag is-medium is-white has-text-weight-semibold">目的港</span>
-                  <div class="select is-expanded">
                     <b-autocomplete
                       :value="portName(current.routeLinePortDischargeId)"
                       @input="value => input2 = value"
@@ -42,7 +40,6 @@
                       :open-on-focus="true"
                       @select="option => current.routeLinePortDischargeId = option ? option.portId : ''">
                     </b-autocomplete>
-                  </div>
                 </div>
 
                 <div class="field is-expanded">
@@ -56,20 +53,18 @@
           <data-table :data="viewData" :pagination="pagination" rowKey="id" :change="onTableChange">
             <table-toolbar has-columns-control>
               <template slot="left">
-                <div class="field is-horizontal">
+                <div class="field is-horizontal is-expanded">
                   <span class="tag is-medium is-white has-text-weight-semibold">船公司</span>
-                  <div class="control">
-                    <div class="select">
-                      <b-autocomplete
-                        :value="carrierName(current.waiPeiCompanyId)"
-                        @input="value => input3 = value"
-                        placeholder="承运公司"
-                        :data="filteredData"
-                        field="nameEn"
-                        :open-on-focus="true"
-                        @select="findByCompany">
-                      </b-autocomplete>
-                    </div>
+                  <div class="control is-3">
+                    <b-autocomplete
+                      :value="carrierName(current.waiPeiCompanyId)"
+                      @input="value => input3 = value"
+                      placeholder="承运公司"
+                      :data="filteredData"
+                      field="nameEn"
+                      :open-on-focus="true"
+                      @select="findByCompany">
+                    </b-autocomplete>
                   </div>
                 </div>
               </template>
@@ -327,4 +322,7 @@
 	.column {
 		margin-bottom: 10px
 	}
+  .is-3{
+    width: 20rem;
+  }
 </style>
